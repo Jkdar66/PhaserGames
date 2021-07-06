@@ -19,9 +19,16 @@ export class Player extends Phaser.GameObjects.Rectangle {
         this.scene.input.addListener("pointerdown", () => {
             this.bullets.push(new Bullet(this));
         });
+        window.addEventListener("keyup", (e) => {
+            switch(e.code) {
+                case "Space":
+                    this.bullets.push(new Bullet(this));
+                    break;
+            }
+        });
 
         this.scene.input.addListener("pointermove", (e: Phaser.Input.Pointer) => {
-            if(e.x > this.height/2 && e.x < GAME_WIDTH - this.height/2) {
+            if(e.x > this.height/1.5 && e.x < GAME_WIDTH - this.height/1.5) {
                 this.x = e.x;
             }
         });
@@ -36,7 +43,7 @@ export class Player extends Phaser.GameObjects.Rectangle {
 
 export class Bullet extends Phaser.GameObjects.Rectangle{
     velX: number;
-    velY: number = 10;
+    velY: number = 15;
     constructor(player: Player) {
         super(player.scene, 0, 0, 0, 0, 0, 1);
         this.width = player.width/10;
