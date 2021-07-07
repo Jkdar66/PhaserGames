@@ -1,6 +1,6 @@
 /// <reference path='../lib/phaser.d.ts'/>
 
-import { Player } from "./game/player.js";
+import { Player } from "./game/game.js";
 
 module Example{
     export class InitPhaser {
@@ -11,9 +11,10 @@ module Example{
 
             let config: Phaser.Types.Core.GameConfig = {
                 type: Phaser.AUTO,
-                width: 500,
-                height: 800,
+                width: innerWidth,
+                height: innerHeight,
                 physics: {
+                    default: "arcade",
                     arcade: {
                         gravity: { y: 5 },
                         debug: false
@@ -37,13 +38,16 @@ module Example{
         }
 
         create() {
-            this.player = new Player(this, 250, 500, 100, 100);
+            this.player = new Player(this);
             this.add.existing(this.player);
-            this.player.fillColor = 0xff00ff;
         }
 
         update() {
-            this.player.update();
+            if(!this.player.isKilled) {
+                this.player.update();
+            } else if (this.player.isKilled) {
+                this.player.delete();
+            }
         }
     }
 }
