@@ -27,28 +27,9 @@ function init() {
 function main() {
     init();
 }
-var shop = document.getElementById("shop");
-var option = document.getElementById("option");
 var gui = document.getElementById("gui");
 var startBtn = document.getElementById("play-btn");
-var shopBtn = document.getElementById("shop-btn");
-var optionBtn = document.getElementById("option-btn");
-var popUpWindow = document.getElementsByClassName("pop-up");
-var closeBtns = document.getElementsByClassName("close");
-for (let i = 0; i < closeBtns.length; i++) {
-    const elem = closeBtns.item(i);
-    const popUp = popUpWindow.item(i);
-    elem.onclick = () => {
-        popUp.style.display = "none";
-    };
-}
 startBtn.onclick = () => {
     gui.style.display = "none";
     main();
-};
-shopBtn.onclick = () => {
-    shop.style.display = "block";
-};
-optionBtn.onclick = () => {
-    option.style.display = "block";
 };
