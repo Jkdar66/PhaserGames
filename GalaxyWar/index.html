@@ -7,28 +7,44 @@
     <title>Galaxy War</title>
 
     <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="https://unpkg.com/flickity@2/dist/flickity.min.css">
-    <script src="https://unpkg.com/flickity@2/dist/flickity.pkgd.min.js"></script>
     <script src="./lib/phaser.js"></script>
     <script type="module" src="./src/main.js"></script>
 </head>
 <body>
     <div id="gui">
         <div class="center">
-            <button id="play-btn">Start</button>
-            <button id="new-game-btn">New Game</button>
+            <button id="play-btn">Play</button>
+            <button id="shop-btn">Shop</button>
             <button id="option-btn">Option</button>
         </div>
-        <div id="option">
-            <div id="flame">
-                <div class="gallery js-flickity">
-                <div class="gallery-cell"></div>
-                <div class="gallery-cell"></div>
-                <div class="gallery-cell"></div>
-                <div class="gallery-cell"></div>
-                <div class="gallery-cell"></div>
-              </div>
+        <div id="shop" class="pop-up">
+            <div>
+                <div class="cards">
+                    <button class="arrow-btn" id="arrow-left"><</button>
+                    <button class="arrow-btn" id="arrow-right">></button>
+                    <div class="card selected">
+                        <input type="radio" name="spaceship" id="ship-1" class="radio">
+                        <label for="ship-1">
+                            <img src="assets/spaceships/prime/1.png" alt="">
+                        </label>
+                    </div>
+                    <div class="card">
+                        <input type="radio" name="spaceship" id="ship-2" class="radio">
+                        <label for="ship-2">
+                            <img src="assets/spaceships/prime/1.png" alt="">
+                        </label>
+                    </div>
+                    <div class="card">
+                        <input type="radio" name="spaceship" id="ship-3" class="radio">
+                        <label for="ship-3">
+                            <img src="assets/spaceships/black/1.png" alt="">
+                        </label>
+                    </div>
+                </div>
             </div>
+            <button class="close" id="shop-close-btn">X</button>
+        </div>
+        <div id="option" class="pop-up">
             <button class="close" id="option-close-btn">X</button>
         </div>
     </div>
