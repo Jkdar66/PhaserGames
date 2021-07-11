@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Galaxy War</title>
+
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://unpkg.com/flickity@2/dist/flickity.min.css">
+    <script src="https://unpkg.com/flickity@2/dist/flickity.pkgd.min.js"></script>
+    <script src="./lib/phaser.js"></script>
+    <script type="module" src="./src/main.js"></script>
+</head>
+<body>
+    <div id="gui">
+        <div class="center">
+            <button id="play-btn">Start</button>
+            <button id="new-game-btn">New Game</button>
+            <button id="option-btn">Option</button>
+        </div>
+        <div id="option">
+            <div id="flame">
+                <div class="gallery js-flickity">
+                <div class="gallery-cell"></div>
+                <div class="gallery-cell"></div>
+                <div class="gallery-cell"></div>
+                <div class="gallery-cell"></div>
+                <div class="gallery-cell"></div>
+              </div>
+            </div>
+            <button class="close" id="option-close-btn">X</button>
+        </div>
+    </div>
+</body>
+</html>
