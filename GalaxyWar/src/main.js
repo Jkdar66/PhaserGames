@@ -27,9 +27,10 @@ function init() {
 function main() {
     init();
 }
-var gui = document.getElementById("gui");
-var startBtn = document.getElementById("play-btn");
-startBtn.onclick = () => {
-    gui.style.display = "none";
-    main();
-};
+main();
+// var gui = document.getElementById("gui");
+// var startBtn = document.getElementById("play-btn");
+// startBtn.onclick = () => {
+//     gui.style.display = "none";
+//     main();
+// }

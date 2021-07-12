@@ -6,8 +6,9 @@ export class Player extends Phaser.GameObjects.Container {
         super(scene);
         this.flames = [];
         this.bullets = [];
+        const SpaceshipData = SPACESHIP.blue[9];
         this.x = Scene.WIDTH / 2;
-        this.y = Scene.HEIGHT / 1.6;
+        this.y = Scene.HEIGHT / SpaceshipData.y;
         this.setScrollFactor(0, 0);
         this.player = new Phaser.GameObjects.Container(scene);
         this.spaceShip = new Phaser.GameObjects.Image(scene, 0, 0, "spaceship");
@@ -20,12 +21,12 @@ export class Player extends Phaser.GameObjects.Container {
             repeat: -1
         };
         scene.anims.create(config);
-        const FlameType = SPACESHIP.prime[1].flame;
+        const FlameData = SpaceshipData.flame;
         const WIDTH = this.spaceShip.displayWidth / 2;
         const HEIGHT = this.spaceShip.displayHeight / 2;
-        for (let i = 0; i < FlameType.x.length; i++) {
-            var x = FlameType.x[i] * WIDTH / 100;
-            var y = FlameType.y[i] * HEIGHT / 100;
+        for (let i = 0; i < FlameData.x.length; i++) {
+            var x = FlameData.x[i] * WIDTH / 100;
+            var y = FlameData.y[i] * HEIGHT / 100;
             this.flames.push(new Phaser.GameObjects.Sprite(scene, x, y, "flame"));
             this.flames[i].y += this.flames[i].displayHeight / 2;
         }
@@ -34,12 +35,12 @@ export class Player extends Phaser.GameObjects.Container {
             this.player.addAt(flame, 0);
             scene.add.existing(flame);
         });
-        const BulletType = SPACESHIP.prime[1].bullet;
+        const BulletData = SpaceshipData.bullet;
         scene.input.on("pointerdown", () => {
             //create flame
-            for (let i = 0; i < BulletType.x.length; i++) {
-                var x = BulletType.x[i] * WIDTH / 100 + this.player.x;
-                var y = BulletType.y[i] * HEIGHT / 100;
+            for (let i = 0; i < BulletData.x.length; i++) {
+                var x = BulletData.x[i] * WIDTH / 100 + this.player.x;
+                var y = BulletData.y[i] * HEIGHT / 100;
                 var blt = new Bullet(scene, x, y);
                 this.bullets.push(blt);
                 this.addAt(blt, 0);

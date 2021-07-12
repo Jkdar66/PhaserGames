@@ -1,6 +1,7 @@
 export const SPACESHIP: SpaceshipType = {
     black: {
         1: {
+            y: 1.45,
             width: 179,
             height: 400,
             bullet: {
@@ -48,6 +49,7 @@ export const SPACESHIP: SpaceshipType = {
             
         },
         9: {
+            y: 1.65,
             width: 293,
             height: 400,
             bullet: {
@@ -73,6 +75,7 @@ export const SPACESHIP: SpaceshipType = {
 
         },
         2: {
+            y: 1.7,
             bullet: {
                 x: [
                     -12.14, 12.14
@@ -111,6 +114,7 @@ export const SPACESHIP: SpaceshipType = {
     },
     prime: {
         1: {
+            y: 1.38,
             width: 403,
             height: 286,
             flame:{
@@ -150,6 +154,7 @@ interface SpaceshipType {
 }
 interface SpaceshipConfig {
     [key: number]: {
+        y?: number;
         width?: number;
         height?: number;
         bullet?: { x: number[], y: number[] };

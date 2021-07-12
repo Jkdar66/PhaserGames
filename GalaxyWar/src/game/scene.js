@@ -7,11 +7,11 @@ export class Scene extends Phaser.Scene {
     preload() {
         this.load.image("background", "../../assets/backgrounds/2.png");
         //load spaceship
-        this.load.image("spaceship", "../../assets/spaceships/prime/1.png");
+        this.load.image("spaceship", "../../assets/spaceships/blue/9.png");
         //load flame
         this.load.spritesheet("flame", "../../assets/flames/blue/1.png", { frameWidth: 40, frameHeight: 150, spacing: 2 });
         //load bullet
-        this.load.spritesheet("bullet", "../../assets/bullets/red/1.png", { frameWidth: 88, frameHeight: 92, spacing: 2 });
+        this.load.spritesheet("bullet", "../../assets/bullets/red/10.png", { frameWidth: 88, frameHeight: 236, spacing: 2 });
     }
     create() {
         this.camera = new Camera(this);
