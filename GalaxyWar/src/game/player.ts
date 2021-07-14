@@ -1,18 +1,22 @@
 import { Bullet } from "./bullet.js";
 import { Scene } from "./scene.js";
-import { SPACESHIP } from "../type.js";
+import { SPACESHIP, SpaceshipData } from "../type.js";
 
 export class Player extends Phaser.GameObjects.Container {
 
     spaceShip: Phaser.GameObjects.Image;
     player: Phaser.GameObjects.Container;
+    shield: Shield;
     flames: Phaser.GameObjects.Sprite[] = [];
     bullets: Bullet[] = [];
+    bulletTime: Date = new Date();
+    spaceshipData: SpaceshipData;
+    maxBulletsNums: number = Infinity;
 
     constructor(scene: Phaser.Scene) {
         super(scene);
 
-        const SpaceshipData = SPACESHIP.blue[9];
+        this.spaceshipData = SPACESHIP.blue[9];
 
         this.player = new Phaser.GameObjects.Container(scene);
 
@@ -31,7 +35,7 @@ export class Player extends Phaser.GameObjects.Container {
         };
         scene.anims.create(config);
 
-        const FlameData = SpaceshipData.flame; // data of flame which is used
+        const FlameData = this.spaceshipData.flame; // data of flame which is used
         const WIDTH = this.spaceShip.displayWidth/2; // half width of spaceship
         const HEIGHT = this.spaceShip.displayHeight/2; // half height of spaceship
 
@@ -52,27 +56,33 @@ export class Player extends Phaser.GameObjects.Container {
         });
 
         //genarate bullet
-        const BulletData = SpaceshipData.bullet; // data of flame which is used
+        const BulletData = this.spaceshipData.bullet; // data of flame which is used
         scene.input.on("pointerdown", () => {
-            genarateBullet()
+            genarateBullet();
         });
-        scene.input.keyboard.on('keyup', (e: KeyboardEvent) => {
+        scene.input.keyboard.on('keydown', (e: KeyboardEvent) => {
             if(e.code == "Space") {
                 genarateBullet();
             }
         });
         const self = this;
         function genarateBullet(): void{
-            //create Bullet
-            for (let i = 0; i < BulletData.x.length; i++) {
-                var x = BulletData.x[i] * WIDTH /100 + self.player.x;
-                var y = BulletData.y[i] * HEIGHT /100;
-    
-                var blt = new Bullet(self.scene, x, y);
-                blt.displayWidth *= 0.5;
-                blt.displayHeight *= 0.5;
-                self.bullets.push(blt);
-                self.addAt(blt, 0);
+            if(self.bullets.length - 1 >= self.maxBulletsNums) { return }
+            var time = new Date().getTime() - self.bulletTime.getTime();
+            if(time >= 150) {
+                //create Bullet
+                for (let i = 0; i < BulletData.x.length; i++) {
+                    var x = BulletData.x[i] * WIDTH /100 + self.player.x;
+                    var y = BulletData.y[i] * HEIGHT /100;
+        
+                    var blt = new Bullet(self.scene, x, y);
+                    blt.displayWidth *= 0.5;
+                    blt.displayHeight *= 0.5;
+                    self.bullets.push(blt);
+                    self.addAt(blt, 0);
+                }
+                self.bulletTime = new Date();
+                return;
             }
         }
 
@@ -87,7 +97,7 @@ export class Player extends Phaser.GameObjects.Container {
         });
 
         function moveLeft(velxX: number) {
-            var x = self.player.x;
+            var x = self.player.x - velxX;
             var minX = -(Scene.WIDTH/2 - self.spaceShip.displayWidth/2) + marginRL;
             if(x > minX) {
                 self.player.x -= velxX;
@@ -97,7 +107,7 @@ export class Player extends Phaser.GameObjects.Container {
             }
         }
         function moveRight(velxX: number) {
-            var x = self.player.x;
+            var x = self.player.x + velxX;
             var maxX = Scene.WIDTH/2 - self.spaceShip.displayWidth/2 - marginRL;
             if(x < maxX) {
                 self.player.x += velxX;
@@ -106,13 +116,13 @@ export class Player extends Phaser.GameObjects.Container {
                 self.player.x = maxX;
             }
         }
-        scene.input.keyboard.on('keydown', (e: KeyboardEvent) => {  
+        scene.input.keyboard.on('keydown', (e: KeyboardEvent) => {
             switch(e.code) {
                 case "ArrowRight":
-                    moveRight(10);
+                    moveRight(50);
                     break;
                 case "ArrowLeft":
-                    moveLeft(10);
+                    moveLeft(50);
                     break;
             }
         });
@@ -129,5 +139,15 @@ export class Player extends Phaser.GameObjects.Container {
         this.bullets.forEach(bullet => {
             bullet.move();
         });
+    }
+}
+
+class Shield extends Phaser.GameObjects.Graphics {
+    constructor(scene: Phaser.Scene, radius?: number) {
+        super(scene);
+        this.lineStyle(2, 0xff0000);
+        this.beginPath();
+        this.arc(0, -radius, radius, 0, Math.PI, true);
+        this.stroke();
     }
 }

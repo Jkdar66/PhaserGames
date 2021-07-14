@@ -144,7 +144,7 @@ export const SPACESHIP: SpaceshipType = {
     }
 };
 
-interface SpaceshipType {
+export interface SpaceshipType {
     black?: SpaceshipConfig;
     blue?: SpaceshipConfig;
     green?: SpaceshipConfig;
@@ -152,12 +152,13 @@ interface SpaceshipType {
     prime?: SpaceshipConfig;
     red?: SpaceshipConfig;
 }
-interface SpaceshipConfig {
-    [key: number]: {
-        y?: number;
-        width?: number;
-        height?: number;
-        bullet?: { x: number[], y: number[] };
-        flame?: { x: number[], y: number[] };
-    }
+export interface SpaceshipConfig {
+    [key: number]: SpaceshipData
+}
+export interface SpaceshipData {
+    y?: number;
+    width?: number;
+    height?: number;
+    bullet?: { x: number[], y: number[] };
+    flame?: { x: number[], y: number[] };
 }

@@ -6,7 +6,9 @@ export class Player extends Phaser.GameObjects.Container {
         super(scene);
         this.flames = [];
         this.bullets = [];
-        const SpaceshipData = SPACESHIP.blue[9];
+        this.bulletTime = new Date();
+        this.maxBulletsNums = Infinity;
+        this.spaceshipData = SPACESHIP.blue[9];
         this.player = new Phaser.GameObjects.Container(scene);
         this.spaceShip = new Phaser.GameObjects.Image(scene, 0, 0, "spaceship");
         this.spaceShip.displayWidth *= 0.7; // scale width of spaceship with faktor 0.5
@@ -20,7 +22,7 @@ export class Player extends Phaser.GameObjects.Container {
             repeat: -1
         };
         scene.anims.create(config);
-        const FlameData = SpaceshipData.flame; // data of flame which is used
+        const FlameData = this.spaceshipData.flame; // data of flame which is used
         const WIDTH = this.spaceShip.displayWidth / 2; // half width of spaceship
         const HEIGHT = this.spaceShip.displayHeight / 2; // half height of spaceship
         for (let i = 0; i < FlameData.x.length; i++) {
@@ -38,26 +40,34 @@ export class Player extends Phaser.GameObjects.Container {
             scene.add.existing(flame);
         });
         //genarate bullet
-        const BulletData = SpaceshipData.bullet; // data of flame which is used
+        const BulletData = this.spaceshipData.bullet; // data of flame which is used
         scene.input.on("pointerdown", () => {
             genarateBullet();
         });
-        scene.input.keyboard.on('keyup', (e) => {
+        scene.input.keyboard.on('keydown', (e) => {
             if (e.code == "Space") {
                 genarateBullet();
             }
         });
         const self = this;
         function genarateBullet() {
-            //create Bullet
-            for (let i = 0; i < BulletData.x.length; i++) {
-                var x = BulletData.x[i] * WIDTH / 100 + self.player.x;
-                var y = BulletData.y[i] * HEIGHT / 100;
-                var blt = new Bullet(self.scene, x, y);
-                blt.displayWidth *= 0.5;
-                blt.displayHeight *= 0.5;
-                self.bullets.push(blt);
-                self.addAt(blt, 0);
+            if (self.bullets.length - 1 >= self.maxBulletsNums) {
+                return;
+            }
+            var time = new Date().getTime() - self.bulletTime.getTime();
+            if (time >= 150) {
+                //create Bullet
+                for (let i = 0; i < BulletData.x.length; i++) {
+                    var x = BulletData.x[i] * WIDTH / 100 + self.player.x;
+                    var y = BulletData.y[i] * HEIGHT / 100;
+                    var blt = new Bullet(self.scene, x, y);
+                    blt.displayWidth *= 0.5;
+                    blt.displayHeight *= 0.5;
+                    self.bullets.push(blt);
+                    self.addAt(blt, 0);
+                }
+                self.bulletTime = new Date();
+                return;
             }
         }
         // move player right or left
@@ -70,7 +80,7 @@ export class Player extends Phaser.GameObjects.Container {
             }
         });
         function moveLeft(velxX) {
-            var x = self.player.x;
+            var x = self.player.x - velxX;
             var minX = -(Scene.WIDTH / 2 - self.spaceShip.displayWidth / 2) + marginRL;
             if (x > minX) {
                 self.player.x -= velxX;
@@ -80,7 +90,7 @@ export class Player extends Phaser.GameObjects.Container {
             }
         }
         function moveRight(velxX) {
-            var x = self.player.x;
+            var x = self.player.x + velxX;
             var maxX = Scene.WIDTH / 2 - self.spaceShip.displayWidth / 2 - marginRL;
             if (x < maxX) {
                 self.player.x += velxX;
@@ -92,10 +102,10 @@ export class Player extends Phaser.GameObjects.Container {
         scene.input.keyboard.on('keydown', (e) => {
             switch (e.code) {
                 case "ArrowRight":
-                    moveRight(10);
+                    moveRight(50);
                     break;
                 case "ArrowLeft":
-                    moveLeft(10);
+                    moveLeft(50);
                     break;
             }
         });
@@ -109,5 +119,14 @@ export class Player extends Phaser.GameObjects.Container {
         this.bullets.forEach(bullet => {
             bullet.move();
         });
+    }
+}
+class Shield extends Phaser.GameObjects.Graphics {
+    constructor(scene, radius) {
+        super(scene);
+        this.lineStyle(2, 0xff0000);
+        this.beginPath();
+        this.arc(0, -radius, radius, 0, Math.PI, true);
+        this.stroke();
     }
 }

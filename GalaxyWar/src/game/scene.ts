@@ -1,3 +1,4 @@
+import { Button } from "../gui/button.js";
 import { Camera } from "./camera.js";
 import { Game } from "./game.js";
 
@@ -27,6 +28,10 @@ export class Scene extends Phaser.Scene{
         //load bullet
         this.load.spritesheet("bullet", "../../assets/bullets/red/10.png", 
         {frameWidth: 88, frameHeight: 236, spacing: 2});
+        
+        //load ui buttons
+        this.load.image("play", "../../assets/gui/Buttons/BTNs/Play_BTN.png");
+        this.load.image("playActive", "../../assets/gui/Buttons/BTNs_Active/Play_BTN.png");
     }
     create() {
         this.camera = new Camera(this);
@@ -36,7 +41,7 @@ export class Scene extends Phaser.Scene{
         this.add.existing(this.myGame);
     }
     update() {
-        this.camera.move();
+        // this.camera.move();
         this.myGame.update();
     }
 }
