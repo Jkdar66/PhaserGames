@@ -1,0 +1,50 @@
+<div class="modal fade" id="{{ popup_id }}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+    aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="staticBackdropLabel"> {{ popup_title }}</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div id="{{ target_id }}" class="carousel slide" data-bs-touch="false"
+                    data-bs-interval="false">
+                    <div class="carousel-inner">
+
+                        {% for i in range(items|length): %}
+                        {% with item = items[i] %}
+                        <div class="carousel-item {% if i == 0: %} {{ 'active' }} {% endif %}">
+                            <input type="radio" class="btn-check radio-img {{ target_id }}" name="{{ target_id }}" id="{{ item['name'] }}" 
+                            autocomplete="off" value="{{ item['name'] }}" {% if i == 0: %} checked {% endif %} >
+                            <label class="btn btn-outline-success img-btn" for="{{ item['name'] }}">
+                                <img draggable="false" src="{{ url_for('static', filename=item['img_src']) }}" 
+                            class="d-block" alt="...">
+                            </label>
+                            
+                            <div class="price">
+                                <button type="button" class="btn btn-primary ">
+                                    {{ item['price'] }}
+                                    <i class="fas {{ item['icon'] }} icon"></i>
+                                </button>
+                            </div>
+                        </div>
+                        {% endwith %}
+                        {% endfor %}
+                        
+                    </div>
+                    <button class="carousel-control-prev" type="button"
+                        data-bs-target="#{{ target_id }}" data-bs-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Previous</span>
+                    </button>
+                    <button class="carousel-control-next" type="button"
+                        data-bs-target="#{{ target_id }}" data-bs-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Next</span>
+                    </button>
+                </div>
+            </div>
+            <div class="modal-footer"></div>
+        </div>
+    </div>
+</div>
