@@ -10,32 +10,35 @@ var GameState;
 var config;
 var game;
 var gameState = GameState.SETTING;
-function init() {
-    config = {
-        type: Phaser.AUTO,
-        scale: {
-            mode: Phaser.Scale.RESIZE,
-            parent: 'phaser-example',
-            width: '100%',
-            height: '100%'
-        },
-        physics: {
-            default: "arcade",
-            arcade: {
-                gravity: { y: 5 },
-                debug: false
-            }
-        },
-        scene: new Scene(""),
-        banner: true,
-        title: ''
-    };
-    game = new Phaser.Game(config);
+class Main {
+    constructor() {
+        this.config = {
+            type: Phaser.AUTO,
+            scale: {
+                mode: Phaser.Scale.RESIZE,
+                parent: 'phaser-example',
+                width: '100%',
+                height: '100%'
+            },
+            physics: {
+                default: "arcade",
+                arcade: {
+                    gravity: { y: 5 },
+                    debug: false
+                }
+            },
+            scene: new Scene(""),
+            banner: true,
+            title: ''
+        };
+    }
+    initGame() {
+        this.game = new Phaser.Game(this.config);
+    }
+    main() {
+    }
 }
-function main() {
-    init();
-}
-// main();
+Main.GAME_STATE = GameState.SETTING;
 var gui = document.getElementById("gui");
 var myGame = document.getElementById("game");
 var playBtn = document.getElementById("play-btn");
@@ -45,7 +48,8 @@ playBtn.onclick = () => {
     gui.style.display = "none";
     myGame.style.display = "block";
     if (gameState != GameState.PAUSED) {
-        main();
+        var main = new Main();
+        main.initGame();
     }
     gameState = GameState.RUNNING;
 };

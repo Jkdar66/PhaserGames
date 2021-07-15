@@ -6,41 +6,47 @@ enum GameState {
     PAUSED, RUNNING, PLAYED, SETTING
 }
 
-
 var config: Phaser.Types.Core.GameConfig;
 var game: Phaser.Game;
 var gameState: number = GameState.SETTING;
 
-function init() {
+class Main {
 
-    config = {
-        type: Phaser.AUTO,
-        scale: {
-            mode: Phaser.Scale.RESIZE,
-            parent: 'phaser-example',
-            width: '100%',
-            height: '100%'
-        },
-        physics: {
-            default: "arcade",
-            arcade: {
-                gravity: { y: 5 },
-                debug: false
-            }
-        },
-        scene: new Scene(""),
-        banner: true,
-        title: ''
+    config: Phaser.Types.Core.GameConfig;
+    game: Phaser.Game;
+    scene: Scene;
+    static GAME_STATE: number = GameState.SETTING;
+
+    constructor() {
+        this.config = {
+            type: Phaser.AUTO,
+            scale: {
+                mode: Phaser.Scale.RESIZE,
+                parent: 'phaser-example',
+                width: '100%',
+                height: '100%'
+            },
+            physics: {
+                default: "arcade",
+                arcade: {
+                    gravity: { y: 5 },
+                    debug: false
+                }
+            },
+            scene: new Scene(""),
+            banner: true,
+            title: ''
+        };
     }
 
-    game = new Phaser.Game(config);
-}
+    initGame() {
+        this.game = new Phaser.Game(this.config);
+    }
 
-function main() {
-    init();
-}
+    main() {
 
-// main();
+    }
+}
 
 var gui = document.getElementById("gui");
 var myGame = document.getElementById("game");
@@ -52,7 +58,8 @@ playBtn.onclick = () => {
     gui.style.display = "none";
     myGame.style.display = "block";
     if(gameState != GameState.PAUSED) {
-        main();
+        var main = new Main();
+        main.initGame();
     }
     gameState = GameState.RUNNING;
 }
