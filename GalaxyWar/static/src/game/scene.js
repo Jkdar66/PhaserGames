@@ -1,4 +1,4 @@
-import { Camera } from "./camera.js";
+import { GameState, State } from "../main.js";
 import { Game } from "./game.js";
 export class Scene extends Phaser.Scene {
     constructor(config) {
@@ -7,7 +7,7 @@ export class Scene extends Phaser.Scene {
     preload() {
         this.load.image("background", "static/assets/backgrounds/2.png");
         //load spaceship
-        this.load.image("spaceship", "static/assets/spaceships/all/2.png");
+        this.load.image("spaceship", "static/assets/spaceships/all/5.png");
         //load flame
         this.load.spritesheet("flame", "static/assets/flames/blue/1.png", { frameWidth: 40, frameHeight: 150, spacing: 2 });
         //load bullet
@@ -17,14 +17,13 @@ export class Scene extends Phaser.Scene {
         this.load.image("playActive", "static/assets/gui/Buttons/BTNs_Active/Play_BTN.png");
     }
     create() {
-        this.camera = new Camera(this);
-        this.cameras.addExisting(this.camera);
         this.myGame = new Game(this);
         this.add.existing(this.myGame);
     }
     update() {
-        // this.camera.move();
-        this.myGame.update();
+        if (GameState.GAME_STATE == State.RUNNING) {
+            this.myGame.update();
+        }
     }
 }
 Scene.WIDTH = innerWidth;

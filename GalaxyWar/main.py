@@ -17,7 +17,7 @@ def getSpaceships():
     for i in range(7):
         lis.append({
             "name": "spaceship" + str(i),
-            "img_src": "assets/spaceships/all/" + str(i+1) + ".png",
+            "img_src": "assets/spaceships/all/" + str(i) + ".png",
             "price": price[i],
             "icon": "fa-coins"
         })

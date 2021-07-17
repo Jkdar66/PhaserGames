@@ -8,11 +8,11 @@ export class Player extends Phaser.GameObjects.Container {
         this.bullets = [];
         this.bulletTime = new Date();
         this.maxBulletsNums = Infinity;
-        this.spaceshipData = SPACESHIP[2];
+        this.spaceshipData = SPACESHIP[5];
         this.player = new Phaser.GameObjects.Container(scene);
         this.spaceShip = new Phaser.GameObjects.Image(scene, 0, 0, "spaceship");
-        this.spaceShip.displayWidth *= 0.7; // scale width of spaceship with faktor 0.5
-        this.spaceShip.displayHeight *= 0.7; // scale height of spaceship with faktor 0.5
+        this.spaceShip.displayWidth *= 0.7; // scale width of spaceship with faktor 0.7
+        this.spaceShip.displayHeight *= 0.7; // scale height of spaceship with faktor 0.7
         this.player.add(this.spaceShip);
         //create Flame
         var config = {

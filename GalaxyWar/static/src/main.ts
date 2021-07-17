@@ -2,20 +2,26 @@
 
 import { Scene } from "./game/scene.js";
 
-enum GameState {
-    PAUSED, RUNNING, PLAYED, SETTING
-}
-
 var config: Phaser.Types.Core.GameConfig;
 var game: Phaser.Game;
-var gameState: number = GameState.SETTING;
+
+
+export enum State {
+    PAUSED, RUNNING, PLAYING, SETTING
+}
+export class GameState {
+    static GAME_STATE: number = State.SETTING;
+}
+
+export class GameConfig {
+    gameState: GameState;
+}
 
 class Main {
 
     config: Phaser.Types.Core.GameConfig;
     game: Phaser.Game;
     scene: Scene;
-    static GAME_STATE: number = GameState.SETTING;
 
     constructor() {
         this.config = {
@@ -57,23 +63,23 @@ var spaceships = document.getElementsByClassName("spaceships-target");
 playBtn.onclick = () => {
     gui.style.display = "none";
     myGame.style.display = "block";
-    if(gameState != GameState.PAUSED) {
+    if(GameState.GAME_STATE != State.PAUSED) {
         var main = new Main();
         main.initGame();
     }
-    gameState = GameState.RUNNING;
+    GameState.GAME_STATE = State.RUNNING;
 }
 settingBtn.onclick = () => {
     gui.style.display = "block";
     myGame.style.display = "none";
-    gameState = GameState.PAUSED;
+    GameState.GAME_STATE = State.PAUSED;
 }
 
 function getSpaceship() {
     for (let i = 0; i < spaceships.length; i++) {
         const spaceship = spaceships[i] as HTMLFormElement;
         spaceship.addEventListener("change", () => {
-            console.log(spaceship);
+            
         });
     }
 }

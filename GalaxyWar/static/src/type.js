@@ -1,5 +1,5 @@
 export const SPACESHIP = {
-    1: {
+    0: {
         // y: 1.38,
         bullet: {
             x: [
@@ -20,7 +20,7 @@ export const SPACESHIP = {
             ]
         }
     },
-    2: {
+    1: {
         // y: 1.38,
         // width: 304,
         // height: 254,
@@ -45,7 +45,7 @@ export const SPACESHIP = {
             ]
         }
     },
-    3: {
+    2: {
         // y: 1.38,
         // width: 464,
         // height: 960,
@@ -66,7 +66,7 @@ export const SPACESHIP = {
             ]
         }
     },
-    4: {
+    3: {
         // y: 1.38,
         // width: 179,
         // height: 400,
@@ -87,7 +87,7 @@ export const SPACESHIP = {
             ]
         }
     },
-    5: {
+    4: {
         // y: 1.38,
         // width: 179,
         // height: 400,
@@ -108,7 +108,7 @@ export const SPACESHIP = {
             ]
         }
     },
-    6: {
+    5: {
         // y: 1.38,
         // width: 293,
         // height: 400,
@@ -129,7 +129,7 @@ export const SPACESHIP = {
             ]
         }
     },
-    7: {
+    6: {
         // y: 1.38,
         // width: 403,
         // height: 286,
