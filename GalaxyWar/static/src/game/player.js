@@ -1,7 +1,6 @@
+import { GameConfig, GameState, State } from "../main.js";
 import { Bullet } from "./bullet.js";
 import { Scene } from "./scene.js";
-import { SPACESHIP } from "../type.js";
-import { GameState, Spaceship, State } from "../main.js";
 export class Player extends Phaser.GameObjects.Container {
     constructor(scene) {
         super(scene);
@@ -9,7 +8,6 @@ export class Player extends Phaser.GameObjects.Container {
         this.bullets = [];
         this.bulletTime = new Date();
         this.maxBulletsNums = Infinity;
-        this.spaceshipData = SPACESHIP[Spaceship.SPACESHIP];
         this.player = new Phaser.GameObjects.Container(scene);
         this.spaceShip = new Phaser.GameObjects.Image(scene, 0, 0, "spaceship");
         this.spaceShip.displayWidth *= 0.7; // scale width of spaceship with faktor 0.7
@@ -23,7 +21,7 @@ export class Player extends Phaser.GameObjects.Container {
             repeat: -1
         };
         scene.anims.create(config);
-        const FlameData = this.spaceshipData.flame; // data of flame which is used
+        const FlameData = GameConfig.spaceship.Data.flame; // data of flame which is used
         const WIDTH = this.spaceShip.displayWidth / 2; // half width of spaceship
         const HEIGHT = this.spaceShip.displayHeight / 2; // half height of spaceship
         for (let i = 0; i < FlameData.x.length; i++) {
@@ -52,7 +50,7 @@ export class Player extends Phaser.GameObjects.Container {
         const self = this;
         function genarateBullet() {
             if (GameState.GAME_STATE == State.RUNNING) {
-                const BulletData = self.spaceshipData.bullet; // data of flame which is used
+                const BulletData = GameConfig.spaceship.Data.bullet; // data of flame which is used
                 if (self.bullets.length - 1 >= self.maxBulletsNums) {
                     return;
                 }
@@ -117,9 +115,6 @@ export class Player extends Phaser.GameObjects.Container {
         this.x = Scene.WIDTH / 2;
         this.y = Scene.HEIGHT - this.spaceShip.displayHeight / 2 - marginBottom;
         this.setScrollFactor(0, 0);
-    }
-    static setSpaceshipData(index) {
-        // this.spaceshipData = SPACESHIP[Spaceship.SPACESHIP];
     }
     move() {
         this.bullets.forEach(bullet => {

@@ -1,7 +1,6 @@
+import { GameConfig, GameState, State } from "../main.js";
 import { Bullet } from "./bullet.js";
 import { Scene } from "./scene.js";
-import { SPACESHIP, SpaceshipData } from "../type.js";
-import { GameState, Spaceship, State } from "../main.js";
 
 export class Player extends Phaser.GameObjects.Container {
 
@@ -11,13 +10,10 @@ export class Player extends Phaser.GameObjects.Container {
     flames: Phaser.GameObjects.Sprite[] = [];
     bullets: Bullet[] = [];
     bulletTime: Date = new Date();
-    spaceshipData: SpaceshipData;
     maxBulletsNums: number = Infinity;
 
     constructor(scene: Phaser.Scene) {
         super(scene);
-
-        this.spaceshipData = SPACESHIP[Spaceship.SPACESHIP];
 
         this.player = new Phaser.GameObjects.Container(scene);
 
@@ -36,7 +32,7 @@ export class Player extends Phaser.GameObjects.Container {
         };
         scene.anims.create(config);
 
-        const FlameData = this.spaceshipData.flame; // data of flame which is used
+        const FlameData = GameConfig.spaceship.Data.flame; // data of flame which is used
         const WIDTH = this.spaceShip.displayWidth/2; // half width of spaceship
         const HEIGHT = this.spaceShip.displayHeight/2; // half height of spaceship
 
@@ -68,7 +64,7 @@ export class Player extends Phaser.GameObjects.Container {
         const self = this;
         function genarateBullet(): void{
             if(GameState.GAME_STATE == State.RUNNING) {
-                const BulletData = self.spaceshipData.bullet; // data of flame which is used
+                const BulletData = GameConfig.spaceship.Data.bullet; // data of flame which is used
                 if(self.bullets.length - 1 >= self.maxBulletsNums) { return }
                 var time = new Date().getTime() - self.bulletTime.getTime();
                 if(time >= 150) {
@@ -137,13 +133,7 @@ export class Player extends Phaser.GameObjects.Container {
         this.y = Scene.HEIGHT - this.spaceShip.displayHeight/2 - marginBottom;
         this.setScrollFactor(0, 0);
     }
-
-    static setSpaceshipData(index: number) {
-        
-        // this.spaceshipData = SPACESHIP[Spaceship.SPACESHIP];
-    }
-
-
+    
     move() {
         this.bullets.forEach(bullet => {
             bullet.move();

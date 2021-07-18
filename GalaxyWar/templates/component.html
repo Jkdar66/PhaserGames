@@ -7,7 +7,24 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                
+                {% with %}
+                    {% set items=spaceships %}
+                    {% set title="Spaceships" %}
+                    {% set comp_card_id="spaceships" %}
+                    {% include "comp_cards.html" %}
+                {% endwith %}
+                {% with %}
+                    {% set items=bullets %}
+                    {% set title="Bullets" %}
+                    {% set comp_card_id="bullets" %}
+                    {% include "comp_cards.html" %}
+                {% endwith %}
+                {% with %}
+                    {% set items=backgrounds %}
+                    {% set title="Backgrounds" %}
+                    {% set comp_card_id="backgrounds" %}
+                    {% include "comp_cards.html" %}
+                {% endwith %}
             </div>
             <div class="modal-footer"></div>
         </div>

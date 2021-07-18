@@ -1,7 +1,7 @@
 // /// <reference path='/lib/phaser.d.ts'/>
 import { Scene } from "./game/scene.js";
-var config;
-var game;
+import { Bullets } from "./type/bulletType.js";
+import { Spaceships } from "./type/spaceshipType.js";
 export var State;
 (function (State) {
     State[State["PAUSED"] = 0] = "PAUSED";
@@ -12,13 +12,23 @@ export var State;
 export class GameState {
 }
 GameState.GAME_STATE = State.SETTING;
-export class Spaceship {
+class Spaceship {
 }
 Spaceship.SPACESHIP = 0;
-export class Bullet {
+Spaceship.Data = Spaceships[Spaceship.SPACESHIP];
+class Bullet {
 }
-export class GameConfig {
+Bullet.BULLET = 0;
+Bullet.Data = Bullets[Bullet.BULLET];
+class Background {
 }
+Background.BACKGROUND = 0;
+export const GameConfig = {
+    gameState: GameState,
+    spaceship: Spaceship,
+    bullet: Bullet,
+    background: Background
+};
 class Main {
     constructor() {
         this.config = {
@@ -51,7 +61,9 @@ var gui = document.getElementById("gui");
 var myGame = document.getElementById("game");
 var playBtn = document.getElementById("play-btn");
 var settingBtn = document.getElementById("setting-btn");
-var spaceships = document.getElementsByClassName("spaceships-target");
+var spaceships = document.getElementsByClassName("spaceships");
+var bullets = document.getElementsByClassName("bullets");
+var backgrounds = document.getElementsByClassName("backgrounds");
 playBtn.onclick = () => {
     gui.style.display = "none";
     myGame.style.display = "block";
@@ -60,25 +72,49 @@ playBtn.onclick = () => {
         main.initGame();
     }
     GameState.GAME_STATE = State.RUNNING;
+    pauseGame();
 };
 settingBtn.onclick = () => {
     gui.style.display = "block";
     myGame.style.display = "none";
     GameState.GAME_STATE = State.PAUSED;
 };
-function getSpaceship() {
-    for (let i = 0; i < spaceships.length; i++) {
-        const spaceship = spaceships[i];
-        spaceship.addEventListener("change", () => {
+function pauseGame() {
+    //disable all cards
+    var gameCards = document.getElementsByClassName("game-card");
+    for (let i = 0; i < gameCards.length; i++) {
+        const spaceship = gameCards[i];
+        spaceship.disabled = true;
+    }
+}
+function getIndex(list, type) {
+    for (let i = 0; i < list.length; i++) {
+        const item = list[i];
+        item.addEventListener("change", () => {
             var num = "";
-            for (let i = 0; i < spaceship.id.length; i++) {
-                const char = spaceship.id[i];
+            for (let i = 0; i < item.id.length; i++) {
+                const char = item.id[i];
                 if (parseInt(char)) {
                     num += char;
                 }
             }
-            Spaceship.SPACESHIP = parseInt(num);
+            var index = parseInt(num);
+            switch (type) {
+                case "Spaceship":
+                    Spaceship.SPACESHIP = index;
+                    Spaceship.Data = Spaceships[index];
+                    break;
+                case "Bullet":
+                    Bullet.BULLET = index;
+                    Bullet.Data = Bullets[index];
+                    break;
+                case "Background":
+                    Background.BACKGROUND = index;
+                    break;
+            }
         });
     }
 }
-getSpaceship();
+getIndex(spaceships, "Spaceship");
+getIndex(bullets, "Bullet");
+getIndex(backgrounds, "Background");
