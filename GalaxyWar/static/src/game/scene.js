@@ -1,4 +1,4 @@
-import { GameState, State } from "../main.js";
+import { GameState, Spaceship, State } from "../main.js";
 import { Game } from "./game.js";
 export class Scene extends Phaser.Scene {
     constructor(config) {
@@ -7,7 +7,7 @@ export class Scene extends Phaser.Scene {
     preload() {
         this.load.image("background", "static/assets/backgrounds/2.png");
         //load spaceship
-        this.load.image("spaceship", "static/assets/spaceships/all/5.png");
+        this.load.image("spaceship", "static/assets/spaceships/all/" + Spaceship.SPACESHIP + ".png");
         //load flame
         this.load.spritesheet("flame", "static/assets/flames/blue/1.png", { frameWidth: 40, frameHeight: 150, spacing: 2 });
         //load bullet

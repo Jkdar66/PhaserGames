@@ -12,6 +12,11 @@ export var State;
 export class GameState {
 }
 GameState.GAME_STATE = State.SETTING;
+export class Spaceship {
+}
+Spaceship.SPACESHIP = 0;
+export class Bullet {
+}
 export class GameConfig {
 }
 class Main {
@@ -65,6 +70,15 @@ function getSpaceship() {
     for (let i = 0; i < spaceships.length; i++) {
         const spaceship = spaceships[i];
         spaceship.addEventListener("change", () => {
+            var num = "";
+            for (let i = 0; i < spaceship.id.length; i++) {
+                const char = spaceship.id[i];
+                if (parseInt(char)) {
+                    num += char;
+                }
+            }
+            Spaceship.SPACESHIP = parseInt(num);
         });
     }
 }
+getSpaceship();

@@ -1,6 +1,7 @@
 import { Bullet } from "./bullet.js";
 import { Scene } from "./scene.js";
 import { SPACESHIP } from "../type.js";
+import { GameState, Spaceship, State } from "../main.js";
 export class Player extends Phaser.GameObjects.Container {
     constructor(scene) {
         super(scene);
@@ -8,7 +9,7 @@ export class Player extends Phaser.GameObjects.Container {
         this.bullets = [];
         this.bulletTime = new Date();
         this.maxBulletsNums = Infinity;
-        this.spaceshipData = SPACESHIP[5];
+        this.spaceshipData = SPACESHIP[Spaceship.SPACESHIP];
         this.player = new Phaser.GameObjects.Container(scene);
         this.spaceShip = new Phaser.GameObjects.Image(scene, 0, 0, "spaceship");
         this.spaceShip.displayWidth *= 0.7; // scale width of spaceship with faktor 0.7
@@ -40,7 +41,6 @@ export class Player extends Phaser.GameObjects.Container {
             scene.add.existing(flame);
         });
         //genarate bullet
-        const BulletData = this.spaceshipData.bullet; // data of flame which is used
         scene.input.on("pointerdown", () => {
             genarateBullet();
         });
@@ -51,23 +51,26 @@ export class Player extends Phaser.GameObjects.Container {
         });
         const self = this;
         function genarateBullet() {
-            if (self.bullets.length - 1 >= self.maxBulletsNums) {
-                return;
-            }
-            var time = new Date().getTime() - self.bulletTime.getTime();
-            if (time >= 150) {
-                //create Bullet
-                for (let i = 0; i < BulletData.x.length; i++) {
-                    var x = BulletData.x[i] * WIDTH / 100 + self.player.x;
-                    var y = BulletData.y[i] * HEIGHT / 100;
-                    var blt = new Bullet(self.scene, x, y);
-                    blt.displayWidth *= 0.5;
-                    blt.displayHeight *= 0.5;
-                    self.bullets.push(blt);
-                    self.addAt(blt, 0);
+            if (GameState.GAME_STATE == State.RUNNING) {
+                const BulletData = this.spaceshipData.bullet; // data of flame which is used
+                if (self.bullets.length - 1 >= self.maxBulletsNums) {
+                    return;
                 }
-                self.bulletTime = new Date();
-                return;
+                var time = new Date().getTime() - self.bulletTime.getTime();
+                if (time >= 150) {
+                    //create Bullet
+                    for (let i = 0; i < BulletData.x.length; i++) {
+                        var x = BulletData.x[i] * WIDTH / 100 + self.player.x;
+                        var y = BulletData.y[i] * HEIGHT / 100;
+                        var blt = new Bullet(self.scene, x, y);
+                        blt.displayWidth *= 0.5;
+                        blt.displayHeight *= 0.5;
+                        self.bullets.push(blt);
+                        self.addAt(blt, 0);
+                    }
+                    self.bulletTime = new Date();
+                    return;
+                }
             }
         }
         // move player right or left
@@ -114,6 +117,9 @@ export class Player extends Phaser.GameObjects.Container {
         this.x = Scene.WIDTH / 2;
         this.y = Scene.HEIGHT - this.spaceShip.displayHeight / 2 - marginBottom;
         this.setScrollFactor(0, 0);
+    }
+    static setSpaceshipData(index) {
+        // this.spaceshipData = SPACESHIP[Spaceship.SPACESHIP];
     }
     move() {
         this.bullets.forEach(bullet => {

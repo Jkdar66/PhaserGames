@@ -13,6 +13,13 @@ export class GameState {
     static GAME_STATE: number = State.SETTING;
 }
 
+export class Spaceship {
+    static SPACESHIP: number = 0;
+}
+export class Bullet {
+    static BULLET: number;
+}
+
 export class GameConfig {
     gameState: GameState;
 }
@@ -79,7 +86,16 @@ function getSpaceship() {
     for (let i = 0; i < spaceships.length; i++) {
         const spaceship = spaceships[i] as HTMLFormElement;
         spaceship.addEventListener("change", () => {
-            
+            var num = "";
+            for (let i = 0; i < spaceship.id.length; i++) {
+                const char = spaceship.id[i];
+                if(parseInt(char)) {
+                    num += char;
+                }
+            }
+            Spaceship.SPACESHIP = parseInt(num);
         });
     }
 }
+
+getSpaceship();
