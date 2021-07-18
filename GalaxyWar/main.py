@@ -7,7 +7,7 @@ def gui():
     spaceships = getSpaceships()
     backgrounds = getBackgrounds()
     bullets = getBullets()
-    return render_template("index2.html", spaceships=spaceships, backgrounds=backgrounds, bullets=bullets)
+    return render_template("index.html", spaceships=spaceships, backgrounds=backgrounds, bullets=bullets)
 
 def getSpaceships():
     price = [

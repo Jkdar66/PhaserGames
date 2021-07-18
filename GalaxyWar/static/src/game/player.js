@@ -52,7 +52,7 @@ export class Player extends Phaser.GameObjects.Container {
         const self = this;
         function genarateBullet() {
             if (GameState.GAME_STATE == State.RUNNING) {
-                const BulletData = this.spaceshipData.bullet; // data of flame which is used
+                const BulletData = self.spaceshipData.bullet; // data of flame which is used
                 if (self.bullets.length - 1 >= self.maxBulletsNums) {
                     return;
                 }
