@@ -113,6 +113,9 @@
     <button type="button" id="setting-btn" class="btn btn-primary">
         <i class="fas fa-cog icon"></i>
     </button>
+    <div id="coins">
+        coins: {{ player["coins"] }} <i class="fas fa-cog icon"></i>
+    </div>
 </div>
 <script type="module" src="{{ url_for('static', filename='src/main.js') }}"></script>
 {% endblock %}
