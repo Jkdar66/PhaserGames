@@ -18,8 +18,8 @@ export class Player extends Phaser.GameObjects.Container {
         this.player = new Phaser.GameObjects.Container(scene);
 
         this.spaceShip = new Phaser.GameObjects.Image(scene, 0, 0, "spaceship");
-        this.spaceShip.displayWidth *= 0.7; // scale width of spaceship with faktor 0.7
-        this.spaceShip.displayHeight *= 0.7; // scale height of spaceship with faktor 0.7
+        this.spaceShip.displayWidth *= 0.5; // scale width of spaceship with faktor 0.7
+        this.spaceShip.displayHeight *= 0.5; // scale height of spaceship with faktor 0.7
         
         this.player.add(this.spaceShip);
 
@@ -80,13 +80,12 @@ export class Player extends Phaser.GameObjects.Container {
                         self.addAt(blt, 0);
                     }
                     self.bulletTime = new Date();
-                    return;
                 }
             }
         }
 
         // move player right or left
-        var marginRL = 10; // distance to lefft right and left of scene
+        var marginRL = 10; // distance to right and left of scene
         scene.input.on("pointermove", (e: Phaser.Input.Pointer) => {
             var mx1 = e.x - this.spaceShip.displayWidth/2;
             var mx2 = e.x + this.spaceShip.displayWidth/2;
@@ -95,24 +94,26 @@ export class Player extends Phaser.GameObjects.Container {
             }
         });
 
-        function moveLeft(velxX: number) {
-            var x = self.player.x - velxX;
+        function moveLeft(velX: number) {
+            var x = self.player.x;
             var minX = -(Scene.WIDTH/2 - self.spaceShip.displayWidth/2) + marginRL;
             if(x > minX) {
-                self.player.x -= velxX;
-            }
-            if(x < minX) {
-                self.player.x = minX;
+                var restX = Math.abs(x - minX);
+                if(restX < velX) { // x-difference between window edge and spaceship
+                    velX = restX;
+                }
+                self.player.x -= velX;
             }
         }
-        function moveRight(velxX: number) {
-            var x = self.player.x + velxX;
+        function moveRight(velX: number) {
+            var x = self.player.x;
             var maxX = Scene.WIDTH/2 - self.spaceShip.displayWidth/2 - marginRL;
             if(x < maxX) {
-                self.player.x += velxX;
-            }
-            if(x > maxX) {
-                self.player.x = maxX;
+                var restX = Math.abs(maxX - x);
+                if(restX < velX) { // x-difference between window edge and spaceship
+                    velX = restX;
+                }
+                self.player.x += velX;
             }
         }
         scene.input.keyboard.on('keydown', (e: KeyboardEvent) => {
@@ -128,9 +129,11 @@ export class Player extends Phaser.GameObjects.Container {
 
         this.add(this.player);
         
-        var marginBottom = 50;
+        var marginBottom = 5;
+        const SPACESHIP_HEIGHT = this.spaceShip.displayHeight;
+        const FLAME_WIDTH = this.flames[0].displayHeight;
         this.x = Scene.WIDTH/2;
-        this.y = Scene.HEIGHT - this.spaceShip.displayHeight/2 - marginBottom;
+        this.y = Scene.HEIGHT - SPACESHIP_HEIGHT/2 - FLAME_WIDTH - marginBottom;
         this.setScrollFactor(0, 0);
     }
     
