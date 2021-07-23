@@ -41,7 +41,7 @@
                         Bullet <i class="fas fa-meteor icon"></i>
                     </button>
                     <button type="button" class="btn btn-primary" data-bs-toggle="modal"
-                        data-bs-target="#bullets-shop">
+                        data-bs-target="#flames-shop">
                         Flame <i class="fas fa-fire-alt icon"></i>
                     </button>
                     <button type="button" class="btn btn-primary" data-bs-toggle="modal"
@@ -76,6 +76,13 @@
     {% with items=bullets %}
         {% set popup_id="bullets-shop" %}
         {% set target_id="bullets-target" %}
+        {% include "popup.html" %}
+    {% endwith %}
+
+    <!-- Flamesshop -->
+    {% with items=flames %}
+        {% set popup_id="flames-shop" %}
+        {% set target_id="flames-target" %}
         {% include "popup.html" %}
     {% endwith %}
 

@@ -8,8 +8,9 @@ def gui():
     spaceships = getSpaceships()
     backgrounds = getBackgrounds()
     bullets = getBullets()
+    flames = getFlames()
     player = basicPlayer()
-    return render_template("index.html", player=player, spaceships=spaceships, backgrounds=backgrounds, bullets=bullets)
+    return render_template("index.html", player=player, spaceships=spaceships, backgrounds=backgrounds, bullets=bullets, flames=flames)
 
 def getSpaceships():
     price = [
@@ -49,6 +50,25 @@ def getBullets():
         })
     return lis
 
+def getFlames():
+    price = [
+        "-", 2500, 5000, 7500, 10000, 15000, 20000, 25000, 30000, 50000
+    ]
+    lis = []
+    player = basicPlayer()
+    for i in range(1):
+        disabled = True
+        if i in player["flames"]["buyed"]:
+            disabled = False
+        lis.append({
+            "name": "flames" + str(i),
+            "img_src": "assets/flames/blue/0" + str(i) + ".png",
+            "price": price[i],
+            "icon": "fa-coins",
+            "buyed": disabled
+        })
+    return lis
+
 def getBackgrounds():
     price = [
         "-", 10000, 100000
@@ -75,6 +95,9 @@ def basicPlayer():
         },
         "bullets": {
             "buyed": [0, 5, 9]
+        },
+        "flames": {
+            "buyed": [0]
         },
         "backgrounds": {
             "buyed": [0, 1]

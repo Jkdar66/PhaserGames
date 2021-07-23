@@ -16,7 +16,6 @@
                                 <div class="carousel-item {% if i == 0: %} {{ 'active' }} {% endif %}">
                                     <img draggable="false" src="{{ url_for('static', filename=item['img_src']) }}" 
                                 class="d-block" alt="...">
-                                    
                                     <div class="price">
                                         <button type="button" class="btn btn-primary " {% if item['buyed'] == False %} disabled {% endif %}>
                                             {{ item['price'] }}
