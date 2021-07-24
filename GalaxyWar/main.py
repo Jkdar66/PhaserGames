@@ -90,6 +90,7 @@ def getBackgrounds():
 
 def basicPlayer():
     player = {
+        "coins": 1000,
         "spaceships": {
             "buyed": [0, 2, 5, 6]
         },
