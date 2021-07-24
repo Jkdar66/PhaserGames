@@ -1,6 +1,5 @@
 export const Spaceships: SpaceshipConfig = {
     0: {
-        // y: 1.38,
         bullet: {
             x: [
                 -12.14, 12.14
@@ -21,9 +20,6 @@ export const Spaceships: SpaceshipConfig = {
         }
     },
     1: {
-        // y: 1.38,
-        // width: 304,
-        // height: 254,
         bullet: {
             x: [
                 -85.53, 85.53, 
@@ -47,9 +43,6 @@ export const Spaceships: SpaceshipConfig = {
 
     },
     2: {
-        // y: 1.38,
-        // width: 464,
-        // height: 960,
         bullet: {
             x: [
                 -85.56, 85.56
@@ -68,9 +61,6 @@ export const Spaceships: SpaceshipConfig = {
         }
     },
     3: {
-        // y: 1.38,
-        // width: 179,
-        // height: 400,
         bullet: {
             x: [
                 -26.26, 26.26
@@ -89,9 +79,6 @@ export const Spaceships: SpaceshipConfig = {
         }
     },
     4: {
-        // y: 1.38,
-        // width: 179,
-        // height: 400,
         bullet: {
             x: [
                 -54.58, 54.58
@@ -110,9 +97,6 @@ export const Spaceships: SpaceshipConfig = {
         }
     },
     5: {
-        // y: 1.38,
-        // width: 293,
-        // height: 400,
         bullet: {
             x: [
                 -15.77, 15.77
@@ -131,9 +115,6 @@ export const Spaceships: SpaceshipConfig = {
         }
     },
     6: {
-        // y: 1.38,
-        // width: 403,
-        // height: 286,
         flame:{
             x: [
                 -87.1, 87.1
@@ -161,9 +142,6 @@ export interface SpaceshipConfig {
     [key: number]: SpaceshipData
 }
 export interface SpaceshipData {
-    // y?: number;
-    // width?: number;
-    // height?: number;
     bullet?: { x: number[], y: number[] };
     flame?: { x: number[], y: number[] };
 }

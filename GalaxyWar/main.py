@@ -2,7 +2,6 @@ from flask import Flask, render_template
 
 app = Flask(__name__)
 
-
 @app.route("/")
 def gui():
     spaceships = getSpaceships()
@@ -92,7 +91,7 @@ def basicPlayer():
     player = {
         "coins": 1000,
         "spaceships": {
-            "buyed": [0, 2, 5, 6]
+            "buyed": [0, 1, 2, 3, 4, 5, 6]
         },
         "bullets": {
             "buyed": [0, 5, 9]
