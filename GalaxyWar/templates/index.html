@@ -10,7 +10,7 @@
         <button type="button" class="btn btn-primary" id="play-btn">
             Play <i class="fas fa-play icon"></i>
         </button>
-        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#component-popup">
+        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#spaceships-component">
             Component <i class="fas fa-check icon"></i>
         </button>
         <!-- Button trigger modal -->
@@ -31,7 +31,7 @@
                     <h5 class="modal-title" id="staticBackdropLabel">Shop</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <div class="modal-body" id="modal-shop">
+                <div class="modal-body">
                     <button type="button" class="btn btn-primary" data-bs-toggle="modal"
                         data-bs-target="#spaceships-shop">
                         Spaceship <i class="fas fa-rocket icon"></i>
@@ -93,6 +93,8 @@
         {% set backgrounds=backgrounds %}
         {% include "component.html" %}
     {% endwith %}
+    
+    {% include "spaceship.html" %}
 
     <!-- Option -->
     <div class="modal fade" id="option-popup" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
@@ -115,14 +117,17 @@
             </div>
         </div>
     </div>
+    
 </div>
+
 <div id="game">
     <button type="button" id="setting-btn" class="btn btn-primary">
         <i class="fas fa-cog icon"></i>
     </button>
-    <div id="coins">
-        coins: {{ player["coins"] }} <i class="fas fa-cog icon"></i>
+    <div id="coins-status">
+        {{ player["coins"] }} <i class="fas fa-coins icon"></i>
     </div>
 </div>
+
 <script type="module" src="{{ url_for('static', filename='src/main.js') }}"></script>
 {% endblock %}

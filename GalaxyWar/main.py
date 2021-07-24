@@ -2,33 +2,30 @@ from flask import Flask, render_template
 
 app = Flask(__name__)
 
-
 @app.route("/")
 def gui():
-    spaceships = getSpaceships()
+    spaceships = getAllSpaceships()
     backgrounds = getBackgrounds()
     bullets = getBullets()
     flames = getFlames()
     player = basicPlayer()
     return render_template("index.html", player=player, spaceships=spaceships, backgrounds=backgrounds, bullets=bullets, flames=flames)
 
-def getSpaceships():
+def getAllSpaceships():
     price = [
-        "-", 2500, 5000, 7500, 10000, 15000, 20000, 25000, 30000, 50000 
+        "-", 2500, 5000, 7500, 10000, 15000, 20000, 25000, 30000, 50000
     ]
     lis = []
     player = basicPlayer()
-    for i in range(7):
-        disabled = True
-        if i in player["spaceships"]["buyed"]:
-            disabled = False
-        lis.append({
-            "name": "spaceship" + str(i),
-            "img_src": "assets/spaceships/all/" + str(i) + ".png",
-            "price": price[i],
-            "icon": "fa-coins",
-            "buyed": disabled
-        })
+    for i in range(6):
+        for j in range(7):
+            lis.append({
+                "name": "spaceship" + str(i),
+                "img_src": "assets/spaceships/" + str(i) + "/" + str(j) + ".png",
+                "price": price[i],
+                "icon": "fa-coins",
+                "buyed": False
+            })
     return lis
 
 def getBullets():
@@ -92,7 +89,7 @@ def basicPlayer():
     player = {
         "coins": 1000,
         "spaceships": {
-            "buyed": [0, 2, 5, 6]
+            "buyed": [0, 1, 2, 3, 4, 5, 6]
         },
         "bullets": {
             "buyed": [0, 5, 9]
@@ -101,10 +98,29 @@ def basicPlayer():
             "buyed": [0]
         },
         "backgrounds": {
-            "buyed": [0, 1]
+            "buyed": [0, 1, 2]
         }
     }
     return player
+
+# def getSpaceships():
+#     price = [
+#         "-", 2500, 5000, 7500, 10000, 15000, 20000, 25000, 30000, 50000 
+#     ]
+#     lis = []
+#     player = basicPlayer()
+#     for i in range(7):
+#         disabled = True
+#         if i in player["spaceships"]["buyed"]:
+#             disabled = False
+#         lis.append({
+#             "name": "spaceship" + str(i),
+#             "img_src": "assets/spaceships/all/" + str(i) + ".png",
+#             "price": price[i],
+#             "icon": "fa-coins",
+#             "buyed": disabled
+#         })
+#     return lis
 
 if __name__ == "__main__":
     app.run()

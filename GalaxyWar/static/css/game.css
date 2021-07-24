@@ -1,0 +1,17 @@
+#setting-btn {
+    position: absolute;
+    margin: 10px;
+    font-size: xx-large;
+}
+#coins-status {
+    min-width: fit-content;
+    border: 1px solid #2d6efa;
+    border-radius: 5px;
+    padding: 5px;
+    position: absolute;
+    right: 10px;
+    margin: 10px 0;
+    font-size: xx-large;
+    text-transform: uppercase;
+    text-align: center;
+}

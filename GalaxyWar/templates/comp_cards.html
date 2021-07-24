@@ -5,7 +5,7 @@
     <div class="comp-card-body">
         {% for i in range(items|length): %}
             {% with item = items[i] %}
-                <div class="comp-card-card">
+                <div class="comp-card-content">
                     <input type="radio" class="btn-check radio-img {{ comp_card_id }} game-card" name="{{ comp_card_id }}" id="{{ item['name'] }}" 
                     autocomplete="off" value="{{ item['name'] }}" {% if i == 0: %} checked {% endif %} 
                     {% if item['buyed'] == True %} disabled {% endif %}>
