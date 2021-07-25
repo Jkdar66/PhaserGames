@@ -1,22 +1,31 @@
-<div class="modal fade" id="{{ popup_id }}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
-    aria-labelledby="staticBackdropLabel" aria-hidden="true">
+
+<div class="modal fade" id="shop-popup" data-bs-backdrop="static" data-bs-keyboard="false" 
+tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="staticBackdropLabel"> {{ popup_title }}</h5>
+                <h5 class="modal-title" id="staticBackdropLabel">Shop</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
                 <button type="button" class="btn btn-primary" data-bs-toggle="modal"
-                data-bs-target="#spaceships-component-popup">
+                    data-bs-target="#spaceships-shop">
                     Spaceship <i class="fas fa-rocket icon"></i>
                 </button>
                 <button type="button" class="btn btn-primary" data-bs-toggle="modal"
-                    data-bs-target="#bullets-component-popup">
+                    data-bs-target="#bullets-shop">
                     Bullet <i class="fas fa-meteor icon"></i>
                 </button>
                 <button type="button" class="btn btn-primary" data-bs-toggle="modal"
-                    data-bs-target="#background-component-popup">
+                    data-bs-target="#flames-shop">
+                    Flame <i class="fas fa-fire-alt icon"></i>
+                </button>
+                <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+                    data-bs-target="#bullets-shop">
+                    Shield <i class="fas fa-shield-alt icon"></i>
+                </button>
+                <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+                    data-bs-target="#background-popup">
                     Background <i class="fas fa-tv icon"></i>
                 </button>
             </div>

@@ -75,35 +75,41 @@
 }
 .comp-card-content{
     display: inline-block;
-    width: 120px;
-    height: 250px;
+    width: 200px;
+    /* height: 250px; */
     margin: 5px;
 }
 
 .spaceship-card {
+    position: relative;
     display: flex;
     justify-content: space-around;
-    margin: 100px auto;
-    padding: 10px;
-    width: 250px;
-    height: 380px;
-    border: 1px solid black;
-    border-radius: 5px;
+    margin: auto;
+    width: 200px;
+    height: 450px;
+}
+.spaceship-card-component {
+    height: 285px;
 }
 
 .spaceship-card .content {
-    position: absolute;
     display: none;
-    margin: 30px auto;
-    padding: 5px;
-    width: 200px;
-    height: 300px;
-    left: calc(50% - 100px);
-    text-align: center;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%,-50%);
+    width: 100%;
+    height: 250px;
+    user-select: none;
+    pointer-events: none;
 }
-
 .spaceship-card input {
     display: none;
+}
+
+.spaceship-card input ~ label {
+    height: fit-content;
+    text-align: center;
 }
 
 .spaceship-card input ~ label .circle {
@@ -119,7 +125,8 @@
     border-color: #fff;
 }
 
-.spaceship-card input:checked ~ label .content {
+.spaceship-card input:checked ~ label .content,
+.spaceship-card input:checked ~ label .btn {
     display: block;
 }
 
@@ -128,15 +135,19 @@
     margin: 5px auto;
     height: auto;
     border-radius: 5px;
-}
-.spaceship-card .content button {
-    margin: auto;
     position: absolute;
-    left: 10px;
-    bottom: 10px;
-    min-width: calc(100% - 20px);
-    padding: 5px;
-    font-size: large;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%,-50%);
+}
+.spaceship-card .btn {
+    display: none;
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%, 0);
+    bottom: 5px;
+    width: 100%;
+    margin: auto;
 }
 .spaceship-card .content button .icon {
     margin: 1px 1px 1px 10px;

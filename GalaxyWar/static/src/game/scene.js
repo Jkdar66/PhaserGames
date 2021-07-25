@@ -6,9 +6,9 @@ export class Scene extends Phaser.Scene {
     }
     preload() {
         this.load.image("background", "static/assets/backgrounds/" + GameConfig.background.BACKGROUND + ".png");
-        var spaceship = "all/" + GameConfig.spaceship.SPACESHIP + ".png";
+        var spaceship = GameConfig.spaceship.IMAGE_SRC;
         //load spaceship
-        this.load.image("spaceship", "static/assets/spaceships/" + spaceship);
+        this.load.image("spaceship", "static/" + spaceship);
         //load flame
         this.load.spritesheet("flame", "static/assets/flames/blue/1.png", { frameWidth: 40, frameHeight: 150, spacing: 2 });
         //load bullet

@@ -24,7 +24,7 @@ def getAllSpaceships():
             if j in player["spaceships"]["bought"][i]:
                 bought = True
             lis[i].append({
-                "name": "spaceship-" + str(i) + "-" + str(j),
+                "name": "spaceship_" + str(i) + "-" + str(j),
                 "img_src": "assets/spaceships/" + str(i) + "/" + str(j) + ".png",
                 "price": price[i],
                 "icon": "fa-coins",

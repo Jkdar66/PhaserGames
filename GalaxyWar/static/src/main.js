@@ -16,6 +16,7 @@ class Spaceship {
 }
 Spaceship.SPACESHIP = 0;
 Spaceship.Data = Spaceships[Spaceship.SPACESHIP];
+Spaceship.IMAGE_SRC = "assets/spaceships/0/0.png";
 class Bullet {
 }
 Bullet.BULLET = 0;
@@ -61,7 +62,8 @@ var gui = document.getElementById("gui");
 var myGame = document.getElementById("game");
 var playBtn = document.getElementById("play-btn");
 var settingBtn = document.getElementById("setting-btn");
-var spaceships = document.getElementsByClassName("spaceships");
+var spaceships = document.getElementsByClassName("spaceships-component");
+var spaceshipsColors = document.getElementsByClassName("spaceships-colors");
 var bullets = document.getElementsByClassName("bullets");
 var backgrounds = document.getElementsByClassName("backgrounds");
 playBtn.onclick = () => {
@@ -94,15 +96,35 @@ function getIndex(list, type) {
             var num = "";
             for (let i = 0; i < item.id.length; i++) {
                 const char = item.id[i];
-                if (parseInt(char)) {
+                if (!isNaN(parseInt(char))) {
                     num += char;
                 }
             }
             var index = parseInt(num);
             switch (type) {
                 case "Spaceship":
-                    Spaceship.SPACESHIP = index;
-                    Spaceship.Data = Spaceships[index];
+                    var label = document.getElementById("spaceships-label-" + index);
+                    var ships = label.getElementsByClassName("spaceships-colors");
+                    for (let i = 0; i < ships.length; i++) {
+                        const ship = ships[i];
+                        if (ship.checked) {
+                            var indexs = ship.id.split("_")[1];
+                            var i1 = parseInt(indexs.split("-")[0]);
+                            var i2 = parseInt(indexs.split("-")[1]);
+                            Spaceship.IMAGE_SRC = "assets/spaceships/" + i1 + "/" + i2 + ".png";
+                            Spaceship.SPACESHIP = i1;
+                            Spaceship.Data = Spaceships[i1];
+                            break;
+                        }
+                    }
+                    break;
+                case "SpaceshipColors":
+                    var indexs = item.id.split("_")[1];
+                    var i1 = parseInt(indexs.split("-")[0]);
+                    var i2 = parseInt(indexs.split("-")[1]);
+                    Spaceship.IMAGE_SRC = "assets/spaceships/" + i1 + "/" + i2 + ".png";
+                    Spaceship.SPACESHIP = i1;
+                    Spaceship.Data = Spaceships[i1];
                     break;
                 case "Bullet":
                     Bullet.BULLET = index;
@@ -116,5 +138,6 @@ function getIndex(list, type) {
     }
 }
 getIndex(spaceships, "Spaceship");
+getIndex(spaceshipsColors, "SpaceshipColors");
 getIndex(bullets, "Bullet");
 getIndex(backgrounds, "Background");
