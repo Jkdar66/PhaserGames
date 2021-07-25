@@ -7,12 +7,7 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                {% with %}
-                    {% set items=spaceships %}
-                    {% set title="Spaceships" %}
-                    {% set comp_card_id="spaceships" %}
-                    {% include "comp_cards.html" %}
-                {% endwith %}
+                {% include "spaceship_component.html" %}
                 {% with %}
                     {% set items=bullets %}
                     {% set title="Bullets" %}

@@ -18,7 +18,7 @@
                                         <img draggable="false" src="{{ url_for('static', filename=item['img_src']) }}" 
                                     class="d-block" alt="...">
                                         <div class="price">
-                                            <button type="button" class="btn btn-primary " {% if item['buyed'] == False %} disabled {% endif %}>
+                                            <button type="button" class="btn btn-primary " {% if item['bought']%} disabled {% endif %}>
                                                 {{ item['price'] }}
                                                 <i class="fas {{ item['icon'] }} icon"></i>
                                             </button>

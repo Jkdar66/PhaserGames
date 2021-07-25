@@ -1,0 +1,28 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-color: rgb(127, 225, 255);
+}
+
+.card {
+    border: 1px solid black;
+}
+
+.card .card-head {
+    
+}
+
+.card .card-body {
+
+}
+
+.card .item .item-btn {
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background-color: black;
+}

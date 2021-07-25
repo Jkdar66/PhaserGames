@@ -76,6 +76,90 @@
 .comp-card-content{
     display: inline-block;
     width: 120px;
-    height: 200px;
+    height: 250px;
     margin: 5px;
+}
+
+.spaceship-card {
+    display: flex;
+    justify-content: space-around;
+    margin: 100px auto;
+    padding: 10px;
+    width: 250px;
+    height: 380px;
+    border: 1px solid black;
+    border-radius: 5px;
+}
+
+.spaceship-card .content {
+    position: absolute;
+    display: none;
+    margin: 30px auto;
+    padding: 5px;
+    width: 200px;
+    height: 300px;
+    left: calc(50% - 100px);
+    text-align: center;
+}
+
+.spaceship-card input {
+    display: none;
+}
+
+.spaceship-card input ~ label .circle {
+    margin: auto;
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    cursor: pointer;
+    border: 3px solid #000;
+}
+
+.spaceship-card input:checked ~ label .circle {
+    border-color: #fff;
+}
+
+.spaceship-card input:checked ~ label .content {
+    display: block;
+}
+
+.spaceship-card .content img {
+    width: 100%;
+    margin: 5px auto;
+    height: auto;
+    border-radius: 5px;
+}
+.spaceship-card .content button {
+    margin: auto;
+    position: absolute;
+    left: 10px;
+    bottom: 10px;
+    min-width: calc(100% - 20px);
+    padding: 5px;
+    font-size: large;
+}
+.spaceship-card .content button .icon {
+    margin: 1px 1px 1px 10px;
+}
+
+.spaceship-0 {
+    background-color: #92cae8;
+}
+.spaceship-1 {
+    background-color: #45bf55;
+}
+.spaceship-2 {
+    background-color: #446e9e;
+}
+.spaceship-3 {
+    background-color: #ee8900;
+}
+.spaceship-4 {
+    background-color: #7b52ab;
+}
+.spaceship-5 {
+    background-color: #bf1533;
+}
+.spaceship-6 {
+    background-color: #ffbb00;
 }

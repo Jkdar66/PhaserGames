@@ -8,81 +8,87 @@
     <link rel="stylesheet" href="card.css">
 </head>
 <body>
-    <div class="card">
-        <!-- <img src="0/0.png" alt="" id="card-img"> -->
+    <div class="ship-card">
 
-        <div class="color-bar">
-            <div>
+        <div class="ship-card-body">
+            <div class="item">
                 <input type="radio" class="colors" name="color" id="ship_0/0" checked>
                 <label for="ship_0/0">
-                    <div style="background-color: #91c9e8;"></div>
-                    <img src="0/0.png" alt="" id="card-img">
+                    <div class="circle" style="background-color: #91c9e8;"></div>
+                    <div class="content">
+                        <img src="0/0.png" alt="" id="card-img">
+                        <button>Select</button>
+                    </div>
                 </label>
             </div>
-
-            <div>
+    
+            <div class="item">
                 <input type="radio" class="colors" name="color" id="ship_0/1">
                 <label for="ship_0/1">
-                    <div style="background-color: #45bf55;"></div>
-                    <img src="0/1.png" alt="" id="card-img">
+                    <div class="circle" style="background-color: #45bf55;"></div>
+                    <div class="content">
+                        <img src="0/1.png" alt="" id="card-img">
+                        <button>Select</button>
+                    </div>
                 </label>
             </div>
-
-            <div>
+    
+            <div class="item">
                 <input type="radio" class="colors" name="color" id="ship_0/2">
                 <label for="ship_0/2">
-                    <div style="background-color: #446e9e;"></div>
-                    <img src="0/2.png" alt="" id="card-img">
+                    <div class="circle" style="background-color: #446e9e;"></div>
+                    <div class="content">
+                        <img src="0/2.png" alt="" id="card-img">
+                        <button>Select</button>
+                    </div>
                 </label>
             </div>
-
-            <div>
+    
+            <div class="item">
                 <input type="radio" class="colors" name="color" id="ship_0/3">
                 <label for="ship_0/3">
-                    <div style="background-color: #ee8900;"></div>
-                    <img src="0/3.png" alt="" id="card-img">
+                    <div class="circle" style="background-color: #ee8900;"></div>
+                    <div class="content">
+                        <img src="0/3.png" alt="" id="card-img">
+                        <button>Select</button>
+                    </div>
                 </label>
             </div>
-
-            <div>
+    
+            <div class="item">
                 <input type="radio" class="colors" name="color" id="ship_0/4">
                 <label for="ship_0/4">
-                    <div style="background-color: #7b52ab;"></div>
-                    <img src="0/4.png" alt="" id="card-img">
+                    <div class="circle" style="background-color: #7b52ab;"></div>
+                    <div class="content">
+                        <img src="0/4.png" alt="" id="card-img">
+                        <button>Select</button>
+                    </div>
                 </label>
             </div>
-
-            <div>
+    
+            <div class="item">
                 <input type="radio" class="colors" name="color" id="ship_0/5">
                 <label for="ship_0/5">
-                    <div style="background-color: #bf1533;"></div>
-                    <img src="0/5.png" alt="" id="card-img">
+                    <div class="circle" style="background-color: #bf1533;"></div>
+                    <div class="content">
+                        <img src="0/5.png" alt="" id="card-img">
+                        <button>Select</button>
+                    </div>
                 </label>
             </div>
-
-            <div>
+    
+            <div class="item">
                 <input type="radio" class="colors" name="color" id="ship_0/6">
                 <label for="ship_0/6">
-                    <div style="background-color: #ffbb00;"></div>
-                    <img src="0/6.png" alt="" id="card-img">
+                    <div class="circle" style="background-color: #ffbb00;"></div>
+                    <div class="content">
+                        <img src="0/6.png" alt="" id="card-img">
+                        <button>Select</button>
+                    </div>
                 </label>
             </div>
         </div>
     </div>
-
-    <script>
-        var colors = document.getElementsByClassName("colors");
-        var cardImg = document.getElementById("card-img");
-        
-        for (let i = 0; i < colors.length; i++) {
-            const color = colors[i];
-            color.addEventListener("change", () => {
-                var id = color.id.split("_");
-                cardImg.src = id[1] + ".png";
-            });
-        }
-        
-    </script>
 
 </body>
 </html>

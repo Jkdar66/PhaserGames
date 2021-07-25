@@ -10,7 +10,7 @@
         <button type="button" class="btn btn-primary" id="play-btn">
             Play <i class="fas fa-play icon"></i>
         </button>
-        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#spaceships-component">
+        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#component-popup">
             Component <i class="fas fa-check icon"></i>
         </button>
         <!-- Button trigger modal -->
@@ -94,7 +94,7 @@
         {% include "component.html" %}
     {% endwith %}
     
-    {% include "spaceship.html" %}
+    <!-- {% include "spaceship.html" %} -->
 
     <!-- Option -->
     <div class="modal fade" id="option-popup" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
