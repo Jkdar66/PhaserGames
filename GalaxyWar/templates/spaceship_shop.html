@@ -1,52 +1,38 @@
 <div class="modal fade" id="spaceships-shop" data-bs-backdrop="static" 
     data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" 
     aria-hidden="true">
-
     <div class="modal-dialog">
         <div class="modal-content">
-
             <div class="modal-header">
                 <h5 class="modal-title" id="staticBackdropLabel">Spaceships-Component</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-
             <div class="modal-body">
                 <div id="spaceships-shop-target" class="carousel slide" data-bs-touch="false"
                         data-bs-interval="false">
                     <div class="carousel-inner"> 
-
-                        
                     {% for i in range(spaceships|length): %}
-
-                    <div class="carousel-item {% if i == 0: %} {{ 'active' }} {% endif %}">
-                        <div class="spaceship-card">
-                            {% for j in range(spaceships[i]|length): %}
-                            {% with item = spaceships[i][j] %}
-                            
-                            <div class="item">
-                                <input type="radio" class="colors" name="spaceship-shop-{{ i }}" 
-                                id="shop-{{ item['name'] }}" {% if j == 0: %} checked {% endif %} >
-                                <label for="shop-{{ item['name'] }}">
-                                    <div class="circle spaceship-{{ j }}"></div>
-                                    <div class="content">
-                                        <img src="{{ url_for('static', filename=item['img_src']) }}" alt="">
-                                    </div>
-                                    <button type="button" class="btn btn-primary " {% if item['bought']%} disabled {% endif %}>
-                                        {{ item['price'] }}
-                                        <i class="fas fa-coins icon"></i>
-                                    </button>
-                                </label>
+                        <div class="carousel-item {% if i == 0: %} {{ 'active' }} {% endif %}">
+                            <div class="spaceship-card">
+                                {% for j in range(spaceships[i]|length): %} {% with item = spaceships[i][j] %}
+                                <div class="item">
+                                    <input type="radio" class="colors" name="spaceship-shop-{{ i }}" 
+                                    id="shop-{{ item['name'] }}" {% if j == 0: %} checked {% endif %} >
+                                    <label for="shop-{{ item['name'] }}">
+                                        <div class="circle spaceship-{{ j }}"></div>
+                                        <div class="content">
+                                            <img src="{{ url_for('static', filename=item['img_src']) }}" alt="">
+                                        </div>
+                                        <button type="button" class="btn btn-primary " {% if item['bought']%} disabled {% endif %}>
+                                            {{ item['price'] }} <i class="fas fa-coins icon"></i>
+                                        </button>
+                                    </label>
+                                </div>
+                                {% endwith %} {% endfor %}
                             </div>
-                    
-                            {% endwith %}
-                            {% endfor %}
                         </div>
-                    </div>
-
                     {% endfor %}
-
                     </div>
-
                     <button class="carousel-control-prev" type="button"
                         data-bs-target="#spaceships-shop-target" data-bs-slide="prev">
                         <span class="carousel-control-prev-icon" aria-hidden="true"></span>

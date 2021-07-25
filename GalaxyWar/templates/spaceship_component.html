@@ -7,25 +7,19 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                
                 <div class="comp-card">
                     <div class="comp-card-head">
                         <h5> Spaceships </h5>
                     </div>
                     <div class="comp-card-body">
-                
                         {% for i in range(spaceships|length): %}
-                
                             <div class="comp-card-content">
                                 <input type="radio" class="btn-check radio-img spaceships-component game-card" 
                                 name="spaceships" id="spaceships-component-{{ i }}" autocomplete="off" 
                                 {% if i == 0: %} checked {% endif %}>
-                
                                 <label class="btn btn-outline-success" id="spaceships-label-{{ i }}" for="spaceships-component-{{ i }}">
                                     <div class="spaceship-card spaceship-card-component">
-                                        {% for j in range(spaceships[i]|length): %}
-                                        {% with item = spaceships[i][j] %}
-                
+                                        {% for j in range(spaceships[i]|length): %} {% with item = spaceships[i][j] %}
                                         <div class="item">
                                             <input type="radio" class="spaceships-colors" name="spaceship-{{ i }}" 
                                             id={{ item['name'] }} {% if j == 0: %} checked {% endif %} >
@@ -36,13 +30,10 @@
                                                 </div>
                                             </label>
                                         </div>
-                                
-                                        {% endwith %}
-                                        {% endfor %}
+                                        {% endwith %} {% endfor %}
                                     </div>
                                 </label>
                             </div>
-                
                         {% endfor %}
                     </div>
                 </div>                

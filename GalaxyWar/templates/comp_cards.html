@@ -12,19 +12,17 @@ aria-labelledby="staticBackdropLabel" aria-hidden="true">
                         <h5> {{ popup_title }} </h5>
                     </div>
                     <div class="comp-card-body">
-                        {% for i in range(items|length): %}
-                            {% with item = items[i] %}
-                                <div class="comp-card-content">
-                                    <input type="radio" class="btn-check radio-img {{ comp_card_id }} game-card" name="{{ comp_card_id }}" id="{{ item['name'] }}" 
-                                    autocomplete="off" value="{{ item['name'] }}" {% if i == 0: %} checked {% endif %} 
-                                    {% if item['bought']  %} disabled {% endif %}>
-                                    <label class="btn btn-outline-success" for="{{ item['name'] }}">
-                                        <img draggable="false" src="{{ url_for('static', filename=item['img_src']) }}" 
-                                    class="d-block" alt="...">
-                                    </label>
-                                </div>
-                            {% endwith %}
-                        {% endfor %}
+                        {% for i in range(items|length): %} {% with item = items[i] %}
+                        <div class="comp-card-content">
+                            <input type="radio" class="btn-check radio-img {{ comp_card_id }} game-card" name="{{ comp_card_id }}" id="{{ item['name'] }}" 
+                            autocomplete="off" value="{{ item['name'] }}" {% if i == 0: %} checked {% endif %} 
+                            {% if item['bought']  %} disabled {% endif %}>
+                            <label class="btn btn-outline-success" for="{{ item['name'] }}">
+                                <img draggable="false" src="{{ url_for('static', filename=item['img_src']) }}" 
+                            class="d-block" alt="...">
+                            </label>
+                        </div>
+                        {% endwith %} {% endfor %}
                     </div>
                 </div>
             </div>

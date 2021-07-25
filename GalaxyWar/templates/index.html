@@ -27,38 +27,38 @@
 
     <!-- Background -->
     {% with items=backgrounds %}
-        {% set popup_id="background-popup" %}
-        {% set target_id="background-target" %}
-        {% include "popup.html" %}
+    {% set popup_id="background-popup" %}
+    {% set target_id="background-target" %}
+    {% include "popup.html" %}
     {% endwith %}
 
     <!-- Spcaeshipshop -->
     {% with items=spaceships %}
-        {% set popup_id="spaceships-shop" %}
-        {% set target_id="spaceships-shop-target" %}
-        {% include "spaceship_shop.html" %}
+    {% set popup_id="spaceships-shop" %}
+    {% set target_id="spaceships-shop-target" %}
+    {% include "spaceship_shop.html" %}
     {% endwith %}
 
     <!-- Bulletshop -->
     {% with items=bullets %}
-        {% set popup_id="bullets-shop" %}
-        {% set target_id="bullets-target" %}
-        {% include "popup.html" %}
+    {% set popup_id="bullets-shop" %}
+    {% set target_id="bullets-target" %}
+    {% include "popup.html" %}
     {% endwith %}
 
     <!-- Flamesshop -->
     {% with items=flames %}
-        {% set popup_id="flames-shop" %}
-        {% set target_id="flames-target" %}
-        {% include "popup.html" %}
+    {% set popup_id="flames-shop" %}
+    {% set target_id="flames-target" %}
+    {% include "popup.html" %}
     {% endwith %}
 
     <!-- Selection -->
     {% with popup_id="component-popup" %}
-        {% set spaceships=spaceships %}
-        {% set bullets=bullets %}
-        {% set backgrounds=backgrounds %}
-        {% include "component.html" %}
+    {% set spaceships=spaceships %}
+    {% set bullets=bullets %}
+    {% set backgrounds=backgrounds %}
+    {% include "component.html" %}
     {% endwith %}
 
     <!--Spaceshipcomponent-->
@@ -66,21 +66,20 @@
 
     <!--Bulletcomponent-->
     {% with %}
-        {% set items=bullets %}
-        {% set popup_title="Bullets" %}
-        {% set comp_card_id="bullets" %}
-        {% set popup_id="bullets-component-popup" %}
-        {% include "comp_cards.html" %}
+    {% set items=bullets %}
+    {% set popup_title="Bullets" %}
+    {% set comp_card_id="bullets" %}
+    {% set popup_id="bullets-component-popup" %}
+    {% include "comp_cards.html" %}
     {% endwith %}
 
     <!-- Backgroundcomponent -->
     <!-- {% with %}
-        {% set items=backgrounds %}
-        {% set title="Backgrounds" %}
-        {% set comp_card_id="backgrounds" %}
-        {% include "comp_cards.html" %}
+    {% set items=backgrounds %}
+    {% set title="Backgrounds" %}
+    {% set comp_card_id="backgrounds" %}
+    {% include "comp_cards.html" %}
     {% endwith %} -->
-
 </div>
 
 <div id="game">
