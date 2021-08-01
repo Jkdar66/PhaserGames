@@ -102,7 +102,7 @@ def basicPlayer():
             "bought": [0]
         },
         "backgrounds": {
-            "bought": [0, 1, 2]
+            "bought": [0]
         }
     }
     return player

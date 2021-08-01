@@ -22,7 +22,7 @@ export const Spaceships: SpaceshipConfig = {
     1: {
         flame:{
             x: [
-                -39.84, 39.84
+                -21.66, 21.66
             ],
             y: [
                 99.28, 99.28
