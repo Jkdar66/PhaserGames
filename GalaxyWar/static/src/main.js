@@ -30,15 +30,19 @@ export const GameConfig = {
     bullet: Bullet,
     background: Background
 };
-class Main {
+export class Main {
     constructor() {
         this.config = {
             type: Phaser.AUTO,
             scale: {
-                mode: Phaser.Scale.RESIZE,
+                mode: Phaser.Scale.FIT,
                 parent: 'phaser-example',
-                width: '100%',
-                height: '100%'
+                autoCenter: Phaser.Scale.CENTER_BOTH,
+                width: innerWidth,
+                height: innerHeight
+            },
+            audio: {
+                disableWebAudio: true
             },
             physics: {
                 default: "arcade",
@@ -55,9 +59,10 @@ class Main {
     initGame() {
         this.game = new Phaser.Game(this.config);
     }
-    main() {
-    }
 }
+Main.WIDTH = 2560;
+Main.HEIGHT = 1329;
+Main.SCALE = innerWidth / Main.WIDTH;
 var gui = document.getElementById("gui");
 var myGame = document.getElementById("game");
 var playBtn = document.getElementById("play-btn");

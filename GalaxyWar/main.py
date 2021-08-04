@@ -72,11 +72,11 @@ def getFlames():
 
 def getBackgrounds():
     price = [
-        1000, 10000, 100000
+        1000, 10000, 100000, 1000000
     ]
     lis = []
     player = basicPlayer()
-    for i in range(3):
+    for i in range(4):
         bought = False
         if i in player["backgrounds"]["bought"]:
             bought = True
@@ -93,19 +93,19 @@ def basicPlayer():
     player = {
         "coins": 1000,
         "spaceships": {
-            "bought": [[0], [], [], [], [], []]
+            "bought": [[0, 1 , 2], [0, 1], [], [], [], []]
         },
         "bullets": {
-            "bought": [0, 5, 9]
+            "bought": [0, 1, 5, 9]
         },
         "flames": {
             "bought": [0]
         },
         "backgrounds": {
-            "bought": [0]
+            "bought": [0, 2, 3]
         }
     }
     return player
 
 if __name__ == "__main__":
-    app.run()
+    app.run(debug=True)

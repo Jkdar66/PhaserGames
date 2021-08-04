@@ -13,6 +13,7 @@ export class Scene extends Phaser.Scene {
         this.load.spritesheet("flame", "static/assets/flames/blue/1.png", { frameWidth: 40, frameHeight: 150, spacing: 2 });
         //load bullet
         this.load.spritesheet("bullet", "static/assets/bullets/red/" + GameConfig.bullet.BULLET + ".png", { frameWidth: GameConfig.bullet.Data.w, frameHeight: GameConfig.bullet.Data.h, spacing: 2 });
+        this.load.audio("shot", "static/assets/audio/shot.mp3");
     }
     create() {
         this.myGame = new Game(this);

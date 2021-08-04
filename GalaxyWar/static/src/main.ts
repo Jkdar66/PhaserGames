@@ -31,20 +31,28 @@ export const GameConfig = {
     background: Background
 }
 
-class Main {
+export class Main {
 
     config: Phaser.Types.Core.GameConfig;
     game: Phaser.Game;
     scene: Scene;
 
+    static WIDTH = 2560;
+    static HEIGHT = 1329;
+    static SCALE = innerWidth / Main.WIDTH;
+
     constructor() {
         this.config = {
             type: Phaser.AUTO,
             scale: {
-                mode: Phaser.Scale.RESIZE,
+                mode: Phaser.Scale.FIT,
                 parent: 'phaser-example',
-                width: '100%',
-                height: '100%'
+                autoCenter: Phaser.Scale.CENTER_BOTH,
+                width: innerWidth,
+                height: innerHeight
+            },
+            audio: {
+                disableWebAudio: true
             },
             physics: {
                 default: "arcade",
@@ -61,10 +69,6 @@ class Main {
 
     initGame() {
         this.game = new Phaser.Game(this.config);
-    }
-
-    main() {
-
     }
 }
 

@@ -11,6 +11,9 @@ export class Scene extends Phaser.Scene{
     myGame: Game;
     background: Phaser.GameObjects.TileSprite;
 
+    music: Phaser.Sound.BaseSound;
+    button: Phaser.GameObjects.Rectangle;
+
     constructor(config: string | Phaser.Types.Scenes.SettingsConfig) {
         super(config);
     }
@@ -30,6 +33,7 @@ export class Scene extends Phaser.Scene{
         this.load.spritesheet("bullet", "static/assets/bullets/red/" + GameConfig.bullet.BULLET + ".png", 
         {frameWidth: GameConfig.bullet.Data.w, frameHeight: GameConfig.bullet.Data.h, spacing: 2});
         
+        this.load.audio("shot", "static/assets/audio/shot.mp3");
     }
     create() {
         this.myGame = new Game(this);

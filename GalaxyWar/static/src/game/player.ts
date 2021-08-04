@@ -1,4 +1,5 @@
-import { GameConfig, GameState, State } from "../main.js";
+import { GameConfig, GameState, Main, State } from "../main.js";
+import { Background } from "./background.js";
 import { Bullet } from "./bullet.js";
 import { Scene } from "./scene.js";
 
@@ -11,9 +12,13 @@ export class Player extends Phaser.GameObjects.Container {
     bulletTime: Date = new Date();
     maxBulletsNums: number = Infinity;
     keys: {[key: string]: boolean} = {};
+    shotSound: Phaser.Sound.BaseSound;
 
     constructor(scene: Phaser.Scene) {
         super(scene);
+
+        
+        this.shotSound = scene.sound.add("shot");
 
         this.player = new Phaser.GameObjects.Container(scene);
 
@@ -82,6 +87,7 @@ export class Player extends Phaser.GameObjects.Container {
         const FLAME_WIDTH = this.flames[0].displayHeight; // get flame height to calculate with spaceship for bottom distance
         this.x = Scene.WIDTH/2; // set x-position to center of window
         this.y = Scene.HEIGHT - HEIGHT - FLAME_WIDTH - marginBottom;
+
     }
     
     fireBullet(): void{
@@ -102,6 +108,7 @@ export class Player extends Phaser.GameObjects.Container {
                     blt.displayHeight *= 0.5;
                     this.bullets.push(blt);
                     this.addAt(blt, 0);
+                    this.shotSound.play();
                 }
                 this.bulletTime = new Date(); // reseting old timer to the current time
             }
@@ -142,6 +149,15 @@ export class Player extends Phaser.GameObjects.Container {
             this.moveRight(10);
         } else if(this.keys["ArrowLeft"]) {
             this.moveLeft(10);
+        }
+        if(this.keys["ArrowUp"]) {
+            if(Background.VELY < Background.MAX_VELY) {
+                Background.VELY += 1;
+            }
+        } else {
+            if(Background.VELY > Background.MIN_VELY) {
+                Background.VELY -= 1;
+            }
         }
     }
 }

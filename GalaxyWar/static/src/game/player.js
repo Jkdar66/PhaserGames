@@ -1,4 +1,5 @@
 import { GameConfig, GameState, State } from "../main.js";
+import { Background } from "./background.js";
 import { Bullet } from "./bullet.js";
 import { Scene } from "./scene.js";
 export class Player extends Phaser.GameObjects.Container {
@@ -9,6 +10,7 @@ export class Player extends Phaser.GameObjects.Container {
         this.bulletTime = new Date();
         this.maxBulletsNums = Infinity;
         this.keys = {};
+        this.shotSound = scene.sound.add("shot");
         this.player = new Phaser.GameObjects.Container(scene);
         this.spaceShip = new Phaser.GameObjects.Image(scene, 0, 0, "spaceship");
         this.spaceShip.displayWidth *= 0.5; // scale width of spaceship with faktor 0.7
@@ -86,6 +88,7 @@ export class Player extends Phaser.GameObjects.Container {
                     blt.displayHeight *= 0.5;
                     this.bullets.push(blt);
                     this.addAt(blt, 0);
+                    this.shotSound.play();
                 }
                 this.bulletTime = new Date(); // reseting old timer to the current time
             }
@@ -125,6 +128,16 @@ export class Player extends Phaser.GameObjects.Container {
         }
         else if (this.keys["ArrowLeft"]) {
             this.moveLeft(10);
+        }
+        if (this.keys["ArrowUp"]) {
+            if (Background.VELY < Background.MAX_VELY) {
+                Background.VELY += 1;
+            }
+        }
+        else {
+            if (Background.VELY > Background.MIN_VELY) {
+                Background.VELY -= 1;
+            }
         }
     }
 }

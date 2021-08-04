@@ -16,13 +16,16 @@
                             <div class="comp-card-content">
                                 <input type="radio" class="btn-check radio-img spaceships-component game-card" 
                                 name="spaceships" id="spaceships-component-{{ i }}" autocomplete="off" 
-                                {% if i == 0: %} checked {% endif %}>
+                                {% if i == 0: %} checked {% endif %}
+                                {% for k in range(spaceships[i]|length) if spaceships[i][k]['bought'] %}
+                                {% else %}disabled
+                                {% endfor %}/>
                                 <label class="btn btn-outline-success" id="spaceships-label-{{ i }}" for="spaceships-component-{{ i }}">
                                     <div class="spaceship-card spaceship-card-component">
                                         {% for j in range(spaceships[i]|length): %} {% with item = spaceships[i][j] %}
                                         <div class="item">
                                             <input type="radio" class="spaceships-colors" name="spaceship-{{ i }}" 
-                                            id={{ item['name'] }} {% if j == 0: %} checked {% endif %} >
+                                            id={{ item['name'] }} {% if j == 0: %} checked {% endif %} {% if not item['bought']  %} disabled {% endif %}>
                                             <label for={{ item['name'] }}>
                                                 <div class="circle spaceship-{{ j }}"></div>
                                                 <div class="content">
