@@ -1,4 +1,4 @@
-// /// <reference path='/lib/phaser.d.ts'/>
+/// <reference path='../lib/phaser.d.ts'/>
 import { Scene } from "./game/scene.js";
 import { Bullets } from "./type/bulletType.js";
 import { Spaceships } from "./type/spaceshipType.js";
@@ -66,6 +66,7 @@ Main.SCALE = innerWidth / Main.WIDTH;
 var gui = document.getElementById("gui");
 var myGame = document.getElementById("game");
 var playBtn = document.getElementById("play-btn");
+var continueBtn = document.getElementById("continue-btn");
 var settingBtn = document.getElementById("setting-btn");
 var spaceships = document.getElementsByClassName("spaceships-component");
 var spaceshipsColors = document.getElementsByClassName("spaceships-colors");
@@ -82,9 +83,10 @@ playBtn.onclick = () => {
     pauseGame();
 };
 settingBtn.onclick = () => {
-    gui.style.display = "block";
-    myGame.style.display = "none";
     GameState.GAME_STATE = State.PAUSED;
+};
+continueBtn.onclick = () => {
+    GameState.GAME_STATE = State.RUNNING;
 };
 function pauseGame() {
     //disable all cards

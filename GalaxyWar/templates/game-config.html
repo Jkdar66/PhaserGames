@@ -1,0 +1,26 @@
+<div class="modal fade" id="game-config-popup" data-bs-backdrop="static" data-bs-keyboard="false" 
+tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Settings</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <button type="button" class="btn btn-primary" id="continue-btn" data-bs-dismiss="modal">
+                    Continue <i class="fas fa-redo-alt icon"></i>
+                </button>
+                <button type="button" class="btn btn-primary" id="new-game-btn">
+                    New Game <i class="fas fa-play icon"></i>
+                </button>
+                <button type="button" class="btn btn-primary" data-bs-toggle="modal" 
+                data-bs-target="#game-config-option">
+                   Option <i class="fas fa-cog icon"></i>
+                </button>
+
+                {% include "game-config-option.html" %}
+            </div>
+            <div class="modal-footer"></div>
+        </div>
+    </div>
+</div>

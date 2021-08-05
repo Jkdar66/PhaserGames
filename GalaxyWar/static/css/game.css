@@ -15,3 +15,24 @@
     text-transform: uppercase;
     text-align: center;
 }
+
+#volume-down-up {
+    display: none;
+}
+#volume-down-up + label {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    width: 100px;
+    height: 100px;
+}
+#volume-down-up:checked + label #volume-up, 
+#volume-down-up + label #volume-mute {
+    display: none;
+}
+#volume-down-up:checked + label #volume-mute, 
+#volume-down-up + label #volume-up {
+    display: block;
+}
+

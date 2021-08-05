@@ -84,12 +84,14 @@
 </div>
 
 <div id="game">
-    <button type="button" id="setting-btn" class="btn btn-primary">
+    <button type="button" id="setting-btn" class="btn btn-primary" data-bs-toggle="modal" 
+    data-bs-target="#game-config-popup">
         <i class="fas fa-cog icon"></i>
     </button>
     <div id="coins-status">
         {{ player["coins"] }} <i class="fas fa-coins icon"></i>
     </div>
+    {% include "game-config.html" %}
 </div>
 
 <script type="module" src="{{ url_for('static', filename='src/main.js') }}"></script>
