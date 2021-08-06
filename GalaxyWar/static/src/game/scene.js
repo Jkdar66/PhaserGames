@@ -27,6 +27,21 @@ export class Scene extends Phaser.Scene {
             volume: 1
         });
         this.gameMusic.play();
+        this.musicChecker = document.getElementById("volume-down-up");
+        this.musicVolume = document.getElementById("game-audio-volume");
+        this.musicChecker.onchange = () => {
+            if (this.musicChecker.checked) {
+                this.gameMusic.setMute(true);
+            }
+            else {
+                this.gameMusic.setMute(false);
+            }
+        };
+        this.musicVolume.onchange = () => {
+            var volume = parseInt(this.musicVolume.value) / 100;
+            this.gameMusic.setVolume(volume);
+            console.log(this.musicVolume.value);
+        };
     }
     update() {
         if (GameState.GAME_STATE == State.RUNNING) {

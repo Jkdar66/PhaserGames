@@ -19,7 +19,7 @@
 #volume-down-up {
     display: none;
 }
-#volume-down-up + label {
+#volume-down-up + label .btn {
     display: flex;
     flex-direction: column;
     justify-content: center;

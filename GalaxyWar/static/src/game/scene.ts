@@ -13,8 +13,10 @@ export class Scene extends Phaser.Scene{
     myGame: Game;
     background: Phaser.GameObjects.TileSprite;
 
-    gameMusic: Phaser.Sound.BaseSound;
+    gameMusic: Phaser.Sound.HTML5AudioSound;
     button: Phaser.GameObjects.Rectangle;
+    musicChecker: HTMLInputElement;
+    musicVolume: HTMLInputElement;
 
     constructor(config: string | Phaser.Types.Scenes.SettingsConfig) {
         super(config);
@@ -48,8 +50,25 @@ export class Scene extends Phaser.Scene{
         this.gameMusic = this.sound.add("game-music", {
             loop: true, 
             volume: 1
-        });
+        }) as Phaser.Sound.HTML5AudioSound;
         this.gameMusic.play();
+      
+        
+        this.musicChecker = document.getElementById("volume-down-up") as HTMLInputElement;
+        this.musicVolume = document.getElementById("game-audio-volume") as HTMLInputElement;
+        this.musicChecker.onchange = () => {
+            if(this.musicChecker.checked) {
+                this.gameMusic.setMute(true);
+            } else {
+                this.gameMusic.setMute(false);
+            }
+        }
+        this.musicVolume.onchange = () => {
+            var volume = parseInt(this.musicVolume.value) /100;
+            this.gameMusic.setVolume(volume); 
+            console.log(this.musicVolume.value);
+        }
+
     }
     update() {
         if(GameState.GAME_STATE == State.RUNNING) {
