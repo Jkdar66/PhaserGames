@@ -8,16 +8,18 @@ tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
             </div>
             <div class="modal-body">
                 <div>
-                    <label for="game-audio-volume" class="form-label">Volume:</label>
-                    <input type="range" class="form-range" id="game-audio-volume" min="0" max="100" value="100">
+                    <label for="game-audio-volume" class="form-label">
+                        <h5>Volume:</h5>
+                    </label>
+                    <input type="range" class="form-range" id="game-audio-volume" min="0" max="100" value="50">
                 </div>
-                <div class="form-check">
+                <div>
                     <input type="checkbox" class="btn-check" id="volume-down-up" autocomplete="off">
                     <label for="volume-down-up">
                         <h5>Music: </h5>
                         <div class="btn btn-outline-primary">
-                            <i class="fas fa-volume-up icon" id="volume-up"></i>
-                            <i class="fas fa-volume-mute icon" id="volume-mute"></i>
+                            <i class="fas fa-volume-up" id="volume-up"></i>
+                            <i class="fas fa-volume-mute" id="volume-mute"></i>
                         </div>
                     </label>
                 </div>

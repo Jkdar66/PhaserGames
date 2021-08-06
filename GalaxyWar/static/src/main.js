@@ -8,6 +8,7 @@ export var State;
     State[State["RUNNING"] = 1] = "RUNNING";
     State[State["PLAYING"] = 2] = "PLAYING";
     State[State["SETTING"] = 3] = "SETTING";
+    State[State["NEW_GAME"] = 4] = "NEW_GAME";
 })(State || (State = {}));
 export class GameState {
 }
@@ -67,6 +68,7 @@ var gui = document.getElementById("gui");
 var myGame = document.getElementById("game");
 var playBtn = document.getElementById("play-btn");
 var continueBtn = document.getElementById("continue-btn");
+var gameConfigCloseBtns = document.getElementsByClassName("game-state-close");
 var settingBtn = document.getElementById("setting-btn");
 var spaceships = document.getElementsByClassName("spaceships-component");
 var spaceshipsColors = document.getElementsByClassName("spaceships-colors");
@@ -88,6 +90,12 @@ settingBtn.onclick = () => {
 continueBtn.onclick = () => {
     GameState.GAME_STATE = State.RUNNING;
 };
+for (let i = 0; i < gameConfigCloseBtns.length; i++) {
+    const btn = gameConfigCloseBtns[i];
+    btn.onclick = () => {
+        GameState.GAME_STATE = State.RUNNING;
+    };
+}
 function pauseGame() {
     //disable all cards
     var gameCards = document.getElementsByClassName("game-card");

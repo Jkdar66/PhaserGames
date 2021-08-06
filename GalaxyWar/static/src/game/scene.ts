@@ -46,16 +46,18 @@ export class Scene extends Phaser.Scene{
     create() {
         this.myGame = new Game(this);
         this.add.existing(this.myGame);
-
-        this.gameMusic = this.sound.add("game-music", {
-            loop: true, 
-            volume: 1
-        }) as Phaser.Sound.HTML5AudioSound;
-        this.gameMusic.play();
-      
         
-        this.musicChecker = document.getElementById("volume-down-up") as HTMLInputElement;
-        this.musicVolume = document.getElementById("game-audio-volume") as HTMLInputElement;
+        this.musicChecker = <HTMLInputElement> document.getElementById("volume-down-up");
+        this.musicVolume = <HTMLInputElement> document.getElementById("game-audio-volume");
+
+        this.gameMusic = <Phaser.Sound.HTML5AudioSound> this.sound.add("game-music", {
+            loop: true, 
+            volume: 0.3,
+            mute: this.musicChecker.checked ? true:false
+        });
+        
+        this.gameMusic.play();
+        
         this.musicChecker.onchange = () => {
             if(this.musicChecker.checked) {
                 this.gameMusic.setMute(true);
@@ -66,13 +68,21 @@ export class Scene extends Phaser.Scene{
         this.musicVolume.onchange = () => {
             var volume = parseInt(this.musicVolume.value) /100;
             this.gameMusic.setVolume(volume); 
-            console.log(this.musicVolume.value);
         }
 
+        var newGameBtn = document.getElementById("new-game-btn");
+        newGameBtn.onclick = () =>  {
+            GameState.GAME_STATE = State.NEW_GAME;
+        }
     }
     update() {
         if(GameState.GAME_STATE == State.RUNNING) {
             this.myGame.update();
+        } else if(GameState.GAME_STATE == State.NEW_GAME) {
+            this.myGame.destroy(true);
+            this.myGame = new Game(this);
+            this.add.existing(this.myGame);
+            GameState.GAME_STATE = State.RUNNING;
         }
     }
 }

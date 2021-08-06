@@ -12,13 +12,15 @@ export class Player extends Phaser.GameObjects.Container {
     bulletTime: Date = new Date();
     maxBulletsNums: number = Infinity;
     keys: {[key: string]: boolean} = {};
-    shotSound: Phaser.Sound.BaseSound;
+    shotSound: Phaser.Sound.HTML5AudioSound;
 
     constructor(scene: Phaser.Scene) {
         super(scene);
 
-        
-        this.shotSound = scene.sound.add("shot");
+        this.shotSound = <Phaser.Sound.HTML5AudioSound> scene.sound.add("shot", {
+            loop: false, 
+            volume: 1
+        });
 
         this.player = new Phaser.GameObjects.Container(scene);
 

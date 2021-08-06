@@ -17,8 +17,8 @@
         <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#shop-popup">
             Shop <i class="fas fa-shopping-cart icon"></i>
         </button>
-        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#option-popup">
-            Option <i class="fas fa-cog icon"></i>
+        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#game-config-option">
+           Option <i class="fas fa-cog icon"></i>
         </button>
     </div>
 
@@ -92,6 +92,7 @@
         {{ player["coins"] }} <i class="fas fa-coins icon"></i>
     </div>
     {% include "game-config.html" %}
+    {% include "game-config-option.html" %}
 </div>
 
 <script type="module" src="{{ url_for('static', filename='src/main.js') }}"></script>

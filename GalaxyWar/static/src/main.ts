@@ -5,7 +5,7 @@ import { BulletData, Bullets } from "./type/bulletType.js";
 import { SpaceshipData, Spaceships } from "./type/spaceshipType.js";
 
 export enum State {
-    PAUSED, RUNNING, PLAYING, SETTING
+    PAUSED, RUNNING, PLAYING, SETTING, NEW_GAME
 }
 export class GameState {
     static GAME_STATE: number = State.SETTING;
@@ -32,7 +32,6 @@ export const GameConfig = {
 }
 
 export class Main {
-
     config: Phaser.Types.Core.GameConfig;
     game: Phaser.Game;
     scene: Scene;
@@ -76,6 +75,7 @@ var gui = document.getElementById("gui");
 var myGame = document.getElementById("game");
 var playBtn = document.getElementById("play-btn");
 var continueBtn = document.getElementById("continue-btn");
+var gameConfigCloseBtns = document.getElementsByClassName("game-state-close");
 var settingBtn = document.getElementById("setting-btn");
 var spaceships = document.getElementsByClassName("spaceships-component");
 var spaceshipsColors = document.getElementsByClassName("spaceships-colors");
@@ -98,6 +98,13 @@ settingBtn.onclick = () => {
 }
 continueBtn.onclick = () => {
     GameState.GAME_STATE = State.RUNNING;
+}
+
+for (let i = 0; i < gameConfigCloseBtns.length; i++) {
+    const btn = <HTMLButtonElement> gameConfigCloseBtns[i];
+    btn.onclick = () => {
+        GameState.GAME_STATE = State.RUNNING;
+    }
 }
 
 function pauseGame() {

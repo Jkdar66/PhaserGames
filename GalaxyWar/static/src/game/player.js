@@ -10,7 +10,10 @@ export class Player extends Phaser.GameObjects.Container {
         this.bulletTime = new Date();
         this.maxBulletsNums = Infinity;
         this.keys = {};
-        this.shotSound = scene.sound.add("shot");
+        this.shotSound = scene.sound.add("shot", {
+            loop: false,
+            volume: 1
+        });
         this.player = new Phaser.GameObjects.Container(scene);
         this.spaceShip = new Phaser.GameObjects.Image(scene, 0, 0, "spaceship");
         this.spaceShip.displayWidth *= 0.5; // scale width of spaceship with faktor 0.7
