@@ -85,7 +85,7 @@ var backgrounds = document.getElementsByClassName("backgrounds");
 playBtn.onclick = () => {
     gui.style.display = "none";
     myGame.style.display = "block";
-    if(GameState.GAME_STATE != State.PAUSED) {
+    if (GameState.GAME_STATE != State.PAUSED) {
         var main = new Main();
         main.initGame();
     }
@@ -101,7 +101,7 @@ continueBtn.onclick = () => {
 }
 
 for (let i = 0; i < gameConfigCloseBtns.length; i++) {
-    const btn = <HTMLButtonElement> gameConfigCloseBtns[i];
+    const btn = <HTMLButtonElement>gameConfigCloseBtns[i];
     btn.onclick = () => {
         GameState.GAME_STATE = State.RUNNING;
     }
@@ -124,21 +124,21 @@ function getIndex(list: HTMLCollectionOf<Element>, type: Component) {
             var num = "";
             for (let i = 0; i < item.id.length; i++) {
                 const char = item.id[i];
-                if(!isNaN(parseInt(char))) {
+                if (!isNaN(parseInt(char))) {
                     num += char;
                 }
             }
-            
+
             var index = parseInt(num);
-            
-            switch(type) {
+
+            switch (type) {
                 case "Spaceship":
                     var label = document.getElementById("spaceships-label-" + index);
                     var ships = label.getElementsByClassName("spaceships-colors");
 
                     for (let i = 0; i < ships.length; i++) {
                         const ship = ships[i] as HTMLInputElement;
-                        if(ship.checked) {
+                        if (ship.checked) {
                             var indexs = ship.id.split("_")[1];
                             var i1 = parseInt(indexs.split("-")[0]);
                             var i2 = parseInt(indexs.split("-")[1]);

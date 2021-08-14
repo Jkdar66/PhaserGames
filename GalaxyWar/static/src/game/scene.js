@@ -22,16 +22,16 @@ export class Scene extends Phaser.Scene {
     create() {
         this.myGame = new Game(this);
         this.add.existing(this.myGame);
-        this.musicChecker = document.getElementById("volume-down-up");
+        this.muteChecker = document.getElementById("volume-down-up");
         this.musicVolume = document.getElementById("game-audio-volume");
         this.gameMusic = this.sound.add("game-music", {
             loop: true,
-            volume: 0.3,
-            mute: this.musicChecker.checked ? true : false
+            volume: parseInt(this.musicVolume.value) / 100,
+            mute: this.muteChecker.checked ? true : false
         });
         this.gameMusic.play();
-        this.musicChecker.onchange = () => {
-            if (this.musicChecker.checked) {
+        this.muteChecker.onchange = () => {
+            if (this.muteChecker.checked) {
                 this.gameMusic.setMute(true);
             }
             else {

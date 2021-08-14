@@ -76,12 +76,12 @@ export class Player extends Phaser.GameObjects.Container {
         const WIDTH = this.spaceShip.displayWidth / 2; // half width of spaceship
         const HEIGHT = this.spaceShip.displayHeight / 2; // half height of spaceship
         if (GameState.GAME_STATE == State.RUNNING) {
-            const BulletData = GameConfig.spaceship.Data.bullet; // data of flame which is used
+            const BulletData = GameConfig.spaceship.Data.bullet; // data of flame which is currently used
             if (this.bullets.length - 1 >= this.maxBulletsNums) {
                 return;
             }
             var time = new Date().getTime() - this.bulletTime.getTime();
-            if (time >= 150) { // detect if the planed time has been passed since the last bullet was fired
+            if (time >= 150) { // detect if 150 ms has been passed since the last bullet was fired
                 //create Bullet
                 for (let i = 0; i < BulletData.x.length; i++) {
                     var x = BulletData.x[i] * WIDTH / 100 + this.player.x;
@@ -120,9 +120,17 @@ export class Player extends Phaser.GameObjects.Container {
         }
     }
     move() {
-        this.bullets.forEach(bullet => {
+        for (let i = 0; i < this.bullets.length; i++) {
+            const bullet = this.bullets[i];
             bullet.move();
-        });
+            var bltY = bullet.getWorldTransformMatrix().ty;
+            if (bltY < 100) {
+                this.bullets[i].parentContainer.remove(bullet);
+                this.bullets[i].destroy(true);
+                this.bullets.splice(i);
+                i--;
+            }
+        }
         if (this.keys["Space"]) {
             this.fireBullet();
         }
