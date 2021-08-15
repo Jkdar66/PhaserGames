@@ -90,7 +90,8 @@ export class Player extends Phaser.GameObjects.Container {
                     blt.displayWidth *= 0.5;
                     blt.displayHeight *= 0.5;
                     this.bullets.push(blt);
-                    this.addAt(blt, 0);
+                    this.add(blt);
+                    console.log(blt.parentContainer);
                     this.shotSound.play();
                 }
                 this.bulletTime = new Date(); // reseting old timer to the current time
@@ -113,24 +114,29 @@ export class Player extends Phaser.GameObjects.Container {
         var maxX = Scene.WIDTH / 2 - this.spaceShip.displayWidth / 2; // - marginRL;
         if (x < maxX) {
             var restX = Math.abs(maxX - x);
-            if (restX < velX) { // delta-x between {{right}} window edge and spaceship
+            if (restX < velX) { // delta-x between {{ right }} window edge and spaceship
                 velX = restX;
             }
             this.player.x += velX;
         }
     }
-    move() {
-        for (let i = 0; i < this.bullets.length; i++) {
+    bulletsUpdate() {
+        for (let i = this.bullets.length - 1; i >= 0; i--) {
             const bullet = this.bullets[i];
-            bullet.move();
             var bltY = bullet.getWorldTransformMatrix().ty;
+            bullet.move();
             if (bltY < 100) {
-                this.bullets[i].parentContainer.remove(bullet);
-                this.bullets[i].destroy(true);
-                this.bullets.splice(i);
-                i--;
+                console.log(bullet);
+                bullet.parentContainer.remove(bullet, true);
+                // this.scene.children.remove(bullet);
+                // this.bullets[i].parentContainer.remove(bullet);
+                // bullet.destroy(true);
+                // this.bullets.splice(i);
             }
         }
+    }
+    move() {
+        this.bulletsUpdate();
         if (this.keys["Space"]) {
             this.fireBullet();
         }
@@ -150,14 +156,5 @@ export class Player extends Phaser.GameObjects.Container {
                 Background.VELY -= 1;
             }
         }
-    }
-}
-class Shield extends Phaser.GameObjects.Graphics {
-    constructor(scene, radius) {
-        super(scene);
-        this.lineStyle(2, 0xff0000);
-        this.beginPath();
-        this.arc(0, -radius, radius, 0, Math.PI, true);
-        this.stroke();
     }
 }
