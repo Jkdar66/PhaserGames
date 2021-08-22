@@ -7,21 +7,60 @@ tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <div>
-                    <label for="game-audio-volume" class="form-label">
-                        <h5>Volume:</h5>
-                    </label>
-                    <input type="range" class="form-range" id="game-audio-volume" min="0" max="100" value="50">
-                </div>
-                <div>
-                    <input type="checkbox" class="btn-check" id="volume-down-up" autocomplete="off">
-                    <label for="volume-down-up">
+
+                <div class="comp-card">
+                    <div class="comp-card-head">
                         <h5>Music: </h5>
-                        <div class="btn btn-outline-primary">
-                            <i class="fas fa-volume-up" id="volume-up"></i>
-                            <i class="fas fa-volume-mute" id="volume-mute"></i>
+                    </div>
+                    <div class="comp-card-body">
+                        <div class="comp-card-content music-sound-cards">
+
+                            <div>
+                                <label for="music-volume" class="form-label">
+                                    <h5>Volume:</h5>
+                                </label>
+                                <input type="range" class="form-range" id="music-volume" min="0" max="100" value="50">
+                            </div>
+
+                            <div>
+                                <h5 class="left">Mute: </h5>
+                                <input type="checkbox" class="btn-check volume-down-up" id="music-mute" autocomplete="off">
+                                <label for="music-mute">
+                                    <div class="btn btn-outline-primary">
+                                        <i class="fas fa-volume-up volume-unmute" id="volume-up"></i>
+                                        <i class="fas fa-volume-mute volume-mute" id="volume-mute"></i>
+                                    </div>
+                                </label>
+                            </div>
                         </div>
-                    </label>
+                    </div>
+                </div>
+                <div class="comp-card">
+                    <div class="comp-card-head">
+                        <h5>Soundeffect: </h5>
+                    </div>
+                    <div class="comp-card-body">
+                        <div class="comp-card-content music-sound-cards">
+
+                            <div>
+                                <label for="sound-effect-volume" class="form-label">
+                                    <h5>Volume:</h5>
+                                </label>
+                                <input type="range" class="form-range" id="sound-effect-volume" min="0" max="100" value="50">
+                            </div>
+
+                            <div>
+                                <h5 class="left">Mute: </h5>
+                                <input type="checkbox" class="btn-check volume-down-up" id="sound-effect-mute" autocomplete="off">
+                                <label for="sound-effect-mute">
+                                    <div class="btn btn-outline-primary">
+                                        <i class="fas fa-volume-up volume-unmute" id="sound-effect-up"></i>
+                                        <i class="fas fa-volume-mute volume-mute" id="sound-effect-mute"></i>
+                                    </div>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
             <div class="modal-footer"></div>

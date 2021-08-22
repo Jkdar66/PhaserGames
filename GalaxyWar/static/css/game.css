@@ -16,23 +16,32 @@
     text-align: center;
 }
 
-#volume-down-up {
+
+.volume-down-up {
     display: none;
 }
-#volume-down-up + label .btn {
+.volume-down-up + label {
+    display: block;
+    width: fit-content;
+    height: fit-content;
+}
+.volume-down-up + label .btn {
     display: flex;
     flex-direction: column;
     justify-content: center;
     text-align: center;
-    width: 100px;
-    height: 100px;
+    width: 60px;
+    height: 60px;
 }
-#volume-down-up:checked + label #volume-up, 
-#volume-down-up + label #volume-mute {
+.volume-down-up:checked + label .volume-unmute, 
+.volume-down-up + label .volume-mute {
     display: none;
 }
-#volume-down-up:checked + label #volume-mute, 
-#volume-down-up + label #volume-up {
+.volume-down-up:checked + label .volume-mute, 
+.volume-down-up + label .volume-unmute {
     display: block;
 }
 
+.left {
+    float: left;
+}

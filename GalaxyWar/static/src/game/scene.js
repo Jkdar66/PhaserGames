@@ -14,32 +14,29 @@ export class Scene extends Phaser.Scene {
         this.load.spritesheet("flame", "static/assets/flames/blue/1.png", { frameWidth: 40, frameHeight: 150, spacing: 2 });
         //load bullet
         this.load.spritesheet("bullet", "static/assets/bullets/red/" + GameConfig.bullet.BULLET + ".png", { frameWidth: GameConfig.bullet.Data.w, frameHeight: GameConfig.bullet.Data.h, spacing: 2 });
+        /* Soundeffect */
         // load shot audio
-        this.load.audio("shot", "static/assets/audio/shot.mp3");
+        this.load.audio("shot", "static/assets/audio/shot2.mp3");
+        /* Game Music */
         // load game audio
         this.load.audio("game-music", "static/assets/audio/game-music.ogg");
     }
     create() {
         this.myGame = new Game(this);
         this.add.existing(this.myGame);
-        this.muteChecker = document.getElementById("volume-down-up");
-        this.musicVolume = document.getElementById("game-audio-volume");
+        this.muteChecker = document.getElementById("music-mute");
+        this.soundVolume = document.getElementById("music-volume");
         this.gameMusic = this.sound.add("game-music", {
             loop: true,
-            volume: parseInt(this.musicVolume.value) / 100,
+            volume: parseInt(this.soundVolume.value) / 100,
             mute: this.muteChecker.checked ? true : false
         });
         this.gameMusic.play();
         this.muteChecker.onchange = () => {
-            if (this.muteChecker.checked) {
-                this.gameMusic.setMute(true);
-            }
-            else {
-                this.gameMusic.setMute(false);
-            }
+            this.gameMusic.setMute(!this.gameMusic.mute);
         };
-        this.musicVolume.onchange = () => {
-            var volume = parseInt(this.musicVolume.value) / 100;
+        this.soundVolume.onchange = () => {
+            var volume = parseInt(this.soundVolume.value) / 100;
             this.gameMusic.setVolume(volume);
         };
         var newGameBtn = document.getElementById("new-game-btn");

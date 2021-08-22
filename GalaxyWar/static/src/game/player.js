@@ -1,20 +1,31 @@
-import { GameConfig, GameState, State } from "../main.js";
-import { Background } from "./background.js";
+import { GameConfig } from "../main.js";
 import { Bullet } from "./bullet.js";
+import { Game } from "./game.js";
 import { Scene } from "./scene.js";
 export class Player extends Phaser.GameObjects.Container {
     constructor(scene) {
-        super(scene);
+        super(scene, 0, 0);
         this.flames = [];
         this.bullets = [];
         this.bulletTime = new Date();
         this.maxBulletsNums = Infinity;
         this.keys = {};
+        this.marginRL = 10;
+        this.muteChecker = document.getElementById("sound-effect-mute");
+        this.soundVolume = document.getElementById("sound-effect-volume");
         this.shotSound = scene.sound.add("shot", {
             loop: false,
-            volume: 1
+            volume: parseInt(this.soundVolume.value) / 100,
+            mute: this.muteChecker.checked ? true : false
         });
-        this.player = new Phaser.GameObjects.Container(scene);
+        this.muteChecker.onchange = () => {
+            this.shotSound.setMute(!this.shotSound.mute);
+        };
+        this.soundVolume.onchange = () => {
+            var volume = parseInt(this.soundVolume.value) / 100;
+            this.shotSound.setVolume(volume);
+        };
+        this.player = new Phaser.GameObjects.Container(scene, 0, 0);
         this.spaceShip = new Phaser.GameObjects.Image(scene, 0, 0, "spaceship");
         this.spaceShip.displayWidth *= 0.5; // scale width of spaceship with faktor 0.7
         this.spaceShip.displayHeight *= 0.5; // scale height of spaceship with faktor 0.7
@@ -57,11 +68,10 @@ export class Player extends Phaser.GameObjects.Container {
             this.keys[e.code] = false;
         });
         // move player right or left
-        var marginRL = 0; // distance to right and left of scene
         scene.input.on("pointermove", (e) => {
             var mx1 = e.x - this.spaceShip.displayWidth / 2;
             var mx2 = e.x + this.spaceShip.displayWidth / 2;
-            if (mx1 > marginRL && mx2 < Scene.WIDTH - marginRL) {
+            if (mx1 > this.marginRL && mx2 < Scene.WIDTH - this.marginRL) {
                 this.player.x = e.x - this.x;
             }
         });
@@ -69,38 +79,33 @@ export class Player extends Phaser.GameObjects.Container {
         this.add(this.player);
         var marginBottom = 5; // space of spaceship to bottom
         const FLAME_WIDTH = this.flames[0].displayHeight; // get flame height to calculate with spaceship for bottom distance
-        this.x = Scene.WIDTH / 2; // set x-position to center of window
-        this.y = Scene.HEIGHT - HEIGHT - FLAME_WIDTH - marginBottom;
+        this.player.x = Scene.WIDTH / 2; // set the x-position to center of window
+        this.player.y = Scene.HEIGHT - HEIGHT - FLAME_WIDTH - marginBottom;
     }
     fireBullet() {
         const WIDTH = this.spaceShip.displayWidth / 2; // half width of spaceship
         const HEIGHT = this.spaceShip.displayHeight / 2; // half height of spaceship
-        if (GameState.GAME_STATE == State.RUNNING) {
-            const BulletData = GameConfig.spaceship.Data.bullet; // data of flame which is currently used
-            if (this.bullets.length - 1 >= this.maxBulletsNums) {
-                return;
+        const BulletData = GameConfig.spaceship.Data.bullet; // data of flame which is currently used
+        // if (this.bullets.length - 1 >= this.maxBulletsNums) { return }
+        var time = new Date().getTime() - this.bulletTime.getTime();
+        if (time >= 150) { // detect if 150 ms has been passed since the last bullet was fired
+            //create Bullet
+            for (let i = 0; i < BulletData.x.length; i++) {
+                var x = (BulletData.x[i] * WIDTH / 100) + this.player.x;
+                var y = (BulletData.y[i] * HEIGHT / 100) + this.player.y;
+                var blt = new Bullet(this.scene, x, y);
+                blt.displayWidth *= 0.5;
+                blt.displayHeight *= 0.5;
+                this.bullets.push(blt);
+                this.add(blt);
+                this.shotSound.play();
             }
-            var time = new Date().getTime() - this.bulletTime.getTime();
-            if (time >= 150) { // detect if 150 ms has been passed since the last bullet was fired
-                //create Bullet
-                for (let i = 0; i < BulletData.x.length; i++) {
-                    var x = BulletData.x[i] * WIDTH / 100 + this.player.x;
-                    var y = BulletData.y[i] * HEIGHT / 100;
-                    var blt = new Bullet(this.scene, x, y);
-                    blt.displayWidth *= 0.5;
-                    blt.displayHeight *= 0.5;
-                    this.bullets.push(blt);
-                    this.add(blt);
-                    console.log(blt.parentContainer);
-                    this.shotSound.play();
-                }
-                this.bulletTime = new Date(); // reseting old timer to the current time
-            }
+            this.bulletTime = new Date(); // reseting old timer to the current time
         }
     }
     moveLeft(velX) {
         var x = this.player.x;
-        var minX = -(Scene.WIDTH / 2 - this.spaceShip.displayWidth / 2); // + marginRL;
+        var minX = this.marginRL + this.spaceShip.displayWidth / 2;
         if (x > minX) {
             var restX = Math.abs(x - minX);
             if (restX < velX) { // delta-x between {{left}} window edge and spaceship
@@ -111,7 +116,7 @@ export class Player extends Phaser.GameObjects.Container {
     }
     moveRight(velX) {
         var x = this.player.x;
-        var maxX = Scene.WIDTH / 2 - this.spaceShip.displayWidth / 2; // - marginRL;
+        var maxX = Scene.WIDTH - this.spaceShip.displayWidth / 2 - this.marginRL;
         if (x < maxX) {
             var restX = Math.abs(maxX - x);
             if (restX < velX) { // delta-x between {{ right }} window edge and spaceship
@@ -123,38 +128,27 @@ export class Player extends Phaser.GameObjects.Container {
     bulletsUpdate() {
         for (let i = this.bullets.length - 1; i >= 0; i--) {
             const bullet = this.bullets[i];
-            var bltY = bullet.getWorldTransformMatrix().ty;
-            bullet.move();
-            if (bltY < 100) {
-                console.log(bullet);
-                bullet.parentContainer.remove(bullet, true);
-                // this.scene.children.remove(bullet);
-                // this.bullets[i].parentContainer.remove(bullet);
-                // bullet.destroy(true);
-                // this.bullets.splice(i);
+            var bltY = bullet.getWorldTransformMatrix().ty + bullet.height / 2; // y-axis from screen of bullets plus its half height
+            var outOfEdge = 0; // edge of window, where the bullets is getting removed
+            if (bltY < outOfEdge) {
+                bullet.destroy(); // destroy bullet from scene
+                this.bullets.splice(i, 1); // remove bullet from the bullets array list
+            }
+            else {
+                bullet.move(); // updating bullet and moving it
             }
         }
     }
     move() {
         this.bulletsUpdate();
-        if (this.keys["Space"]) {
-            this.fireBullet();
-        }
-        if (this.keys["ArrowRight"]) {
+        if (Game.KEYS["ArrowRight"] || Game.KEYS["KeyD"]) {
             this.moveRight(10);
         }
-        else if (this.keys["ArrowLeft"]) {
+        else if (Game.KEYS["ArrowLeft"] || Game.KEYS["KeyA"]) {
             this.moveLeft(10);
         }
-        if (this.keys["ArrowUp"]) {
-            if (Background.VELY < Background.MAX_VELY) {
-                Background.VELY += 1;
-            }
-        }
-        else {
-            if (Background.VELY > Background.MIN_VELY) {
-                Background.VELY -= 1;
-            }
+        if (Game.KEYS["Space"]) {
+            this.fireBullet();
         }
     }
 }

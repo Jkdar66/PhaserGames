@@ -56,18 +56,23 @@ export class Main {
             physics: {
                 default: "arcade",
                 arcade: {
-                    gravity: { y: 5 },
+                    gravity: { y: 0 },
                     debug: false
                 }
             },
             scene: new Scene(""),
             banner: true,
-            title: ''
+            title: 'Galaxy War'
         };
     }
 
     initGame() {
+        var newGameBtn = document.getElementById("new-game-btn");
         this.game = new Phaser.Game(this.config);
+
+        // newGameBtn.onclick = () => {
+        //     this.game.destroy(false);
+        // }
     }
 }
 
@@ -82,7 +87,7 @@ var spaceshipsColors = document.getElementsByClassName("spaceships-colors");
 var bullets = document.getElementsByClassName("bullets");
 var backgrounds = document.getElementsByClassName("backgrounds");
 
-playBtn.onclick = () => {
+playBtn.onclick = function() {
     gui.style.display = "none";
     myGame.style.display = "block";
     if (GameState.GAME_STATE != State.PAUSED) {
@@ -101,7 +106,7 @@ continueBtn.onclick = () => {
 }
 
 for (let i = 0; i < gameConfigCloseBtns.length; i++) {
-    const btn = <HTMLButtonElement>gameConfigCloseBtns[i];
+    const btn = <HTMLButtonElement> gameConfigCloseBtns[i];
     btn.onclick = () => {
         GameState.GAME_STATE = State.RUNNING;
     }
