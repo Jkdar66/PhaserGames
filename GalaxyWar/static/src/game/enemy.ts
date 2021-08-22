@@ -5,7 +5,7 @@ export class Enemies extends Phaser.GameObjects.Container{
     passedTime: Date = new Date();
 
     static CELL_SIZE = 100;
-    static GRID_HEIGHT = 1000;
+    static GRID_HEIGHT = 3000;
     static GRID_WIDTH = innerWidth;
     static START_X = 0;
     static START_Y = -Enemies.CELL_SIZE;
@@ -49,12 +49,15 @@ export class Enemies extends Phaser.GameObjects.Container{
                 this.grid[row].push(0);
             }
         }
+        this.createEnemies();
     }
 
     getAvailableCells(): {row: number, column: number}[] {
         var list: {row: number, column: number}[] = [];
         for (let row = 0; row < this.grid.length; row++) {
-            for (let column = 0; column < this.grid[row].length; column++) {
+            var start = 0;
+            if(row%2 == 1) { start = 1; }
+            for (let column = start; column < this.grid[row].length; column+=2) {
                 const cell = this.grid[row][column];
                 if(cell == 0) {
                     list.push({row: row, column: column});
@@ -66,9 +69,9 @@ export class Enemies extends Phaser.GameObjects.Container{
 
     createEnemies() {
         var time = new Date().getTime() - this.passedTime.getTime();
-        if(time > 5000) {
+        // if(time > 5000) {
 
-            for (let i = 0; i < 5; i++) {
+            for (let i = 0; i < 100; i++) {
                 var cells = this.getAvailableCells();
                 
                 if(cells.length == 0) { break; }
@@ -87,7 +90,7 @@ export class Enemies extends Phaser.GameObjects.Container{
             }
 
             this.passedTime = new Date();
-        }
+        // }
     }
 
     addEnemy(child: Enemy, row: number, column: number) {
@@ -111,7 +114,6 @@ export class Enemies extends Phaser.GameObjects.Container{
             }
         }
 
-        this.createEnemies();
     }
 }
 

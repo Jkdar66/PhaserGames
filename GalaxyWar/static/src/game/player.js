@@ -11,6 +11,7 @@ export class Player extends Phaser.GameObjects.Container {
         this.maxBulletsNums = Infinity;
         this.keys = {};
         this.marginRL = 10;
+        // game sound
         this.muteChecker = document.getElementById("sound-effect-mute");
         this.soundVolume = document.getElementById("sound-effect-volume");
         this.shotSound = scene.sound.add("shot", {

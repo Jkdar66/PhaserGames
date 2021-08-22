@@ -15,6 +15,6 @@ export class Bullet extends Phaser.GameObjects.Sprite {
         this.play("bulletAnimi");
     }
     move() {
-        this.y -= 15;
+        this.y -= 20;
     }
 }

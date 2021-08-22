@@ -24,6 +24,7 @@ export class Player extends Phaser.GameObjects.Container {
     constructor(scene: Phaser.Scene) {
         super(scene, 0, 0);
 
+        // game sound
         this.muteChecker = <HTMLInputElement> document.getElementById("sound-effect-mute");
         this.soundVolume = <HTMLInputElement> document.getElementById("sound-effect-volume");
         this.shotSound = <Phaser.Sound.HTML5AudioSound>scene.sound.add("shot", {

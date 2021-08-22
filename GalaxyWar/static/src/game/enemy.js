@@ -26,11 +26,16 @@ export class Enemies extends Phaser.GameObjects.Container {
                 this.grid[row].push(0);
             }
         }
+        this.createEnemies();
     }
     getAvailableCells() {
         var list = [];
         for (let row = 0; row < this.grid.length; row++) {
-            for (let column = 0; column < this.grid[row].length; column++) {
+            var start = 0;
+            if (row % 2 == 1) {
+                start = 1;
+            }
+            for (let column = start; column < this.grid[row].length; column += 2) {
                 const cell = this.grid[row][column];
                 if (cell == 0) {
                     list.push({ row: row, column: column });
@@ -41,22 +46,22 @@ export class Enemies extends Phaser.GameObjects.Container {
     }
     createEnemies() {
         var time = new Date().getTime() - this.passedTime.getTime();
-        if (time > 5000) {
-            for (let i = 0; i < 5; i++) {
-                var cells = this.getAvailableCells();
-                if (cells.length == 0) {
-                    break;
-                }
-                const index = Math.floor(Math.random() * cells.length);
-                const row = cells[index].row;
-                const column = cells[index].column;
-                this.grid[row][column] = 1;
-                var x = (column * Enemies.CELL_SIZE) + Enemies.CELL_SIZE / 2 + Enemies.START_X;
-                var y = -((row * Enemies.CELL_SIZE) + Enemies.CELL_SIZE / 2) + Enemies.START_Y;
-                this.addEnemy(new Enemy(this.scene, x, y), row, column);
+        // if(time > 5000) {
+        for (let i = 0; i < 100; i++) {
+            var cells = this.getAvailableCells();
+            if (cells.length == 0) {
+                break;
             }
-            this.passedTime = new Date();
+            const index = Math.floor(Math.random() * cells.length);
+            const row = cells[index].row;
+            const column = cells[index].column;
+            this.grid[row][column] = 1;
+            var x = (column * Enemies.CELL_SIZE) + Enemies.CELL_SIZE / 2 + Enemies.START_X;
+            var y = -((row * Enemies.CELL_SIZE) + Enemies.CELL_SIZE / 2) + Enemies.START_Y;
+            this.addEnemy(new Enemy(this.scene, x, y), row, column);
         }
+        this.passedTime = new Date();
+        // }
     }
     addEnemy(child, row, column) {
         this.children.push(child);
@@ -76,11 +81,10 @@ export class Enemies extends Phaser.GameObjects.Container {
                 enemy.move();
             }
         }
-        this.createEnemies();
     }
 }
 Enemies.CELL_SIZE = 100;
-Enemies.GRID_HEIGHT = 1000;
+Enemies.GRID_HEIGHT = 3000;
 Enemies.GRID_WIDTH = innerWidth;
 Enemies.START_X = 0;
 Enemies.START_Y = -Enemies.CELL_SIZE;
