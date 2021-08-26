@@ -11,7 +11,7 @@ export class Scene extends Phaser.Scene {
         //load spaceship
         this.load.image("spaceship", "static/" + spaceship);
         //load flame
-        this.load.spritesheet("flame", "static/assets/flames/blue/1.png", { frameWidth: 40, frameHeight: 150, spacing: 2 });
+        this.load.spritesheet("flame", "static/assets/flames/blue/2.png", { frameWidth: 40, frameHeight: 150, spacing: 2 });
         //load bullet
         this.load.spritesheet("bullet", "static/assets/bullets/red/" + GameConfig.bullet.BULLET + ".png", { frameWidth: GameConfig.bullet.Data.w, frameHeight: GameConfig.bullet.Data.h, spacing: 2 });
         /* Soundeffect */
@@ -20,6 +20,8 @@ export class Scene extends Phaser.Scene {
         /* Game Music */
         // load game audio
         this.load.audio("game-music", "static/assets/audio/game-music.ogg");
+        /* load enemy */
+        // this.load.image("enemy", "");
     }
     create() {
         this.myGame = new Game(this);
