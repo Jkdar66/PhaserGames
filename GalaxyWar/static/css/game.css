@@ -16,7 +16,6 @@
     text-align: center;
 }
 
-
 .volume-down-up {
     display: none;
 }
@@ -40,8 +39,4 @@
 .volume-down-up:checked + label .volume-mute, 
 .volume-down-up + label .volume-unmute {
     display: block;
-}
-
-.left {
-    float: left;
 }
